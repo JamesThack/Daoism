@@ -20,6 +20,12 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(new EventsClass());
     }
 
+    /**
+     * Register the textures for items
+     * @param item The item data
+     * @param meta The item meta
+     * @param id The location ID (Eg inventories)
+     */
     public void registerItemRenderer(Item item, int meta, String id) {
         ModelLoader.setCustomModelResourceLocation(item,meta, new ModelResourceLocation(item.getRegistryName(), id));
     }
