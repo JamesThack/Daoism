@@ -6,11 +6,22 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
+import javax.annotation.Nonnull;
+
+/**
+ * Handles the injection of a capability and input/output of NBTTags
+ */
 public class CultivationHandler implements ICapabilitySerializable<NBTTagCompound> {
 
+    /**
+     * Injects the capability to allow for an instance to be extracted
+     */
     @CapabilityInject(CultivationCapability.class)
     public static final Capability<CultivationCapability> CULTIVATION_CAPABILITY = null;
 
+    /**
+     * Creates a new instance of the capability injection
+     */
     CultivationCapability instance = CULTIVATION_CAPABILITY.getDefaultInstance();
 
     @Override
@@ -20,7 +31,7 @@ public class CultivationHandler implements ICapabilitySerializable<NBTTagCompoun
     }
 
     @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+    public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing) {
 
         return hasCapability(capability, facing) ? CULTIVATION_CAPABILITY.<T>cast(instance) : null;
     }
@@ -36,4 +47,5 @@ public class CultivationHandler implements ICapabilitySerializable<NBTTagCompoun
 
         CULTIVATION_CAPABILITY.getStorage().readNBT(CULTIVATION_CAPABILITY, instance, null, nbt);
     }
+
 }
