@@ -1,14 +1,15 @@
 package com.daoism.cultivation.EntityData;
 
+/**
+ * Implementation of the CultivationCapability interface, used to control cultivation
+ * aspects about the player
+ */
 public class CultivationControl {
-
-
-
 
     public static class CultivationHandler implements CultivationCapability {
 
-        private int cultivation;
-        private boolean canCultivate;
+        private int cultivation; //The cultivation level
+        private boolean canCultivate; //If the player can cultivate
 
         @Override
         public void addCultivation(int cult) {
@@ -26,8 +27,5 @@ public class CultivationControl {
         }
     }
 
-
-
-
-    }
+}
 
