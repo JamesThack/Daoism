@@ -1,0 +1,16 @@
+[
+{
+  "modid": "daoism",
+  "name": "Daoism",
+  "description": "A custom mod for minecraft that allows cultivation and so much more!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Caleb,Libra"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

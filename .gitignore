@@ -1,0 +1,13 @@
+forge-1.12.2-14.23.5.2768-mdk.zip
+gradlew.bat
+gradlew
+gradle.properties
+build.gradle
+run/
+out/
+gradle/
+eclipse/
+build/
+.idea/
+.gradle/
+.git/
