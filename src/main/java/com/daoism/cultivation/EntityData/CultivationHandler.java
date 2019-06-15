@@ -6,9 +6,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-
 public class CultivationHandler implements ICapabilitySerializable<NBTTagCompound> {
-
 
     @CapabilityInject(CultivationCapability.class)
     public static final Capability<CultivationCapability> CULTIVATION_CAPABILITY = null;
