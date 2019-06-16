@@ -17,18 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventsClass {
 
     /**
-     * This method is called when the player sleeps in a bed
-     * @param e The event data
-     */
-    @SubscribeEvent
-    public void playerData(PlayerSleepInBedEvent e) {
-        if (e.getEntityLiving() instanceof EntityPlayer) {
-            CultivationCapability cult = e.getEntityPlayer().getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
-            cult.setCultivate(true);
-        }
-    }
-
-    /**
      * This event is called when the player interacts with the world
      * @param e The event data
      */

@@ -25,6 +25,10 @@ public class CultivationControl {
         public boolean canCultivate() {
             return this.canCultivate;
         }
+        @Override
+        public int getCultivationLevel() {
+            return cultivation;
+        }
     }
 
 }

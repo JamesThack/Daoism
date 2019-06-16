@@ -14,6 +14,7 @@ public class Storage implements Capability.IStorage<CultivationCapability> {
     public NBTBase writeNBT(Capability<CultivationCapability> capability, CultivationCapability instance, EnumFacing side) {
         final NBTTagCompound tag = new NBTTagCompound();
         tag.setBoolean("canCultivate", instance.canCultivate());
+        tag.setInteger("cultivationLevel", instance.getCultivationLevel());
         return tag;
     }
 

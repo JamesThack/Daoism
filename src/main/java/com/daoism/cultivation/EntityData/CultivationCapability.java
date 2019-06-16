@@ -23,4 +23,6 @@ public interface CultivationCapability {
      */
     boolean canCultivate();
 
+    int getCultivationLevel();
+
 }
