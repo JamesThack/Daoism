@@ -23,6 +23,10 @@ public interface CultivationCapability {
      */
     boolean canCultivate();
 
+    /**
+     * Method to return cultivation level
+     * @return Int of cultivation level
+     */
     int getCultivationLevel();
 
 }

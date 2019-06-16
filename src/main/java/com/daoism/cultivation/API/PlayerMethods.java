@@ -54,6 +54,11 @@ public class PlayerMethods {
         return getCultivationInstance(player).canCultivate();
     }
 
+    /**
+     * Returns the players cultivation level
+     * @param player The player
+     * @return An int of the cultivation level
+     */
     public static int getEntityCultivationLevel(EntityPlayer player) {
         return getCultivationInstance(player).getCultivationLevel();
     }
