@@ -21,6 +21,7 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onItemRegister(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(ItemInit.ITEMS.toArray((new Item[0])));
+        event.getRegistry().registerAll(ItemInit.ITEMS_REGULAR.toArray(new Item[0]));
     }
 
     /**
@@ -30,6 +31,14 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (Item item : ItemInit.ITEMS) {
+            try {
+                Daoism.proxy.registerItemRenderer(item, 0 , "inventories");
+            } catch(Exception e) {
+                //Really fucking hope the code doesn't get here lmao
+            }
+        }
+
+        for (Item item : ItemInit.ITEMS_REGULAR) {
             try {
                 Daoism.proxy.registerItemRenderer(item, 0 , "inventories");
             } catch(Exception e) {
