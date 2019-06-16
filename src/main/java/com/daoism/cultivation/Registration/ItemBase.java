@@ -37,7 +37,7 @@ public class ItemBase extends Item {
          */
         @SideOnly(Side.CLIENT)
         @SubscribeEvent
-        public void onInteract(PlayerInteractEvent e) {
+        public void onInteract(PlayerInteractEvent.RightClickItem e) {
             if (e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem().getUnlocalizedName().equalsIgnoreCase("item.misc_magnifying_glass")) {
                 if (PlayerMethods.isPlayerCultivator(e.getEntityPlayer())) {
                     PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("Your current cultivation level is " + PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer())));
