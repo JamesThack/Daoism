@@ -54,4 +54,8 @@ public class PlayerMethods {
         return getCultivationInstance(player).canCultivate();
     }
 
+    public static int getEntityCultivationLevel(EntityPlayer player) {
+        return getCultivationInstance(player).getCultivationLevel();
+    }
+
 }

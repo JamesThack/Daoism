@@ -1,6 +1,7 @@
 package com.daoism.cultivation.EntityData;
 
 import com.daoism.cultivation.EventsClass;
+import com.daoism.cultivation.Registration.ItemBase;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
@@ -17,6 +18,7 @@ public class CommonProxy {
      */
     public void init(){
         CapabilityManager.INSTANCE.register(CultivationCapability.class, new Storage(), CultivationControl.CultivationHandler::new);
+        MinecraftForge.EVENT_BUS.register(new ItemBase.ItemEventsHandler());
         MinecraftForge.EVENT_BUS.register(new EventsClass());
     }
 
