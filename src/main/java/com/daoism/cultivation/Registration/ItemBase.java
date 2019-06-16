@@ -13,19 +13,25 @@ import net.minecraft.world.World;
 public class ItemBase extends ItemFood {
 
     /**
-     * The constructor that sets the name and registery name as well as adding it to the
-     * array list of items
-     * @param name Name of the item (local name)
+     * Constructor that creates all the item attributes and adds it to the items array
+     * @param amount How much the food restores hunger
+     * @param saturation The saturation (How long the food lasts)
+     * @param isWolfFood Boolean to say if the food can be fed to a wolf
+     * @param name Unlocalised Name
      */
-
     public ItemBase(int amount, float saturation, boolean isWolfFood, String name) {
         super(amount, saturation, isWolfFood);
-
         setUnlocalizedName(name);
         setRegistryName(name);
         ItemInit.ITEMS.add(this);
     }
 
+    /**
+     * Event that happens whenever a player eats the food
+     * @param stack The item of food that was eaten
+     * @param worldIn The world that the player is in
+     * @param player The player that ate the food
+     */
     @Override
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         super.onFoodEaten(stack, worldIn, player);
@@ -43,4 +49,5 @@ public class ItemBase extends ItemFood {
             }
         }
     }
+
 }
