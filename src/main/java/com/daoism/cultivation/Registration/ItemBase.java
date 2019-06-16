@@ -37,12 +37,15 @@ public class ItemBase extends Item {
          */
         @SideOnly(Side.CLIENT)
         @SubscribeEvent
-        public void onInteract(PlayerInteractEvent e) {
-            if (e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem().getUnlocalizedName().equalsIgnoreCase("item.misc_magnifying_glass")) {
-                if (PlayerMethods.isPlayerCultivator(e.getEntityPlayer())) {
-                    PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("Your current cultivation level is " + PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer())));
-                } else {
-                    PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This magnifying glass seems mysterious, maybe if you had more spiritual understanding you could use it");
+        public void onInteract(PlayerInteractEvent.RightClickItem e) {
+            if(!e.getEntity().getEntityWorld().isRemote) {
+                if ((e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem().getUnlocalizedName().equalsIgnoreCase("item.misc_magnifying_glass") && e.getHand().equals(EnumHand.MAIN_HAND)) || (e.getEntityPlayer().getHeldItem(EnumHand.OFF_HAND).getItem().getUnlocalizedName().equalsIgnoreCase("item.misc_magnifying_glass") && e.getHand().equals(EnumHand.OFF_HAND))) {
+                    if (PlayerMethods.isPlayerCultivator(e.getEntityPlayer())) {
+                        PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("Your current cultivation level is " + PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer())));
+                    } else {
+                        PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This magnifying glass seems mysterious, maybe if you had more spiritual understanding you could use it");
+                        System.out.println(e.getHand().toString());
+                    }
                 }
             }
         }
