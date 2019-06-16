@@ -1,6 +1,8 @@
 package com.daoism.cultivation.Registration;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import scala.tools.nsc.settings.Final;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  */
 public class ItemInit {
 
-    public static final ArrayList<Item> ITEMS = new ArrayList<>();
-    public static final Item AQUA_PILL = new ItemBase("food_aquapill");
+    public static final ArrayList<ItemFood> ITEMS = new ArrayList<>();
+    public static final Item AQUA_PILL = new ItemBase(0,0,false,"food_aquapill").setAlwaysEdible().setCreativeTab(CreativeTabs.FOOD).setMaxStackSize(1);
 
 }
