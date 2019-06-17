@@ -5,6 +5,8 @@ import com.daoism.cultivation.API.PlayerMethods;
 import com.daoism.cultivation.EntityData.CultivationCapability;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -40,11 +42,15 @@ public class ItemBase extends Item {
         public void onInteract(PlayerInteractEvent.RightClickItem e) {
             if(!e.getEntity().getEntityWorld().isRemote) {
                 if ((e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem().getUnlocalizedName().equalsIgnoreCase("item.misc_magnifying_glass") && e.getHand().equals(EnumHand.MAIN_HAND)) || (e.getEntityPlayer().getHeldItem(EnumHand.OFF_HAND).getItem().getUnlocalizedName().equalsIgnoreCase("item.misc_magnifying_glass") && e.getHand().equals(EnumHand.OFF_HAND))) {
-                    if (PlayerMethods.isPlayerCultivator(e.getEntityPlayer())) {
-                        PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("Your current cultivation level is " + PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer())));
+                    if(e.getEntityPlayer().isSneaking()) {
+                        if (PlayerMethods.isPlayerCultivator(e.getEntityPlayer())) {
+                            PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("Your current cultivation level is " + PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer())), new Style().setColor(TextFormatting.GOLD));
+                        } else {
+                            PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This magnifying glass seems mysterious, maybe if you had more spiritual understanding you could use it", new Style().setColor(TextFormatting.GOLD));
+                            System.out.println(e.getHand().toString());
+                        }
                     } else {
-                        PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This magnifying glass seems mysterious, maybe if you had more spiritual understanding you could use it");
-                        System.out.println(e.getHand().toString());
+
                     }
                 }
             }

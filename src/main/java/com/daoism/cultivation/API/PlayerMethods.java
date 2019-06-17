@@ -3,7 +3,15 @@ package com.daoism.cultivation.API;
 import com.daoism.cultivation.EntityData.CultivationCapability;
 import com.daoism.cultivation.EntityData.CultivationHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Objects;
 
 /**
  * API Class that has methods involved with interacting directly with an EntityPlayer
@@ -19,12 +27,16 @@ public class PlayerMethods {
         player.sendMessage(new TextComponentString(text) {});
     }
 
+    public static void sendMsgToPlayer(EntityPlayer player, String text, Style style) {
+        player.sendMessage(new TextComponentString(text).setStyle(style));
+    }
+
     /**
      * Method to kill the player
      * @param player The player
      */
     public static void killPlayer(EntityPlayer player) {
-       player.setDead();
+       player.addPotionEffect(new PotionEffect(Objects.requireNonNull(Potion.getPotionById(7)),1,30,false,false));
     }
 
     /**
