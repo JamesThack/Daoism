@@ -19,5 +19,9 @@ public class ItemInit {
     //Normal Items
     public static final ArrayList<Item> ITEMS_REGULAR = new ArrayList<>();
     public static final Item CULTIVATION_IDENTIFIER = new ItemBase("misc_magnifying_glass").setCreativeTab(CreativeTabs.MISC);
+    public static final Item SPIRIT_OF_EATH = new ItemBase("misc_spirit_of_earth").setCreativeTab(CreativeTabs.MISC);
+    public static final Item SPIRIT_OF_WATER = new ItemBase("misc_spirit_of_water").setCreativeTab(CreativeTabs.MISC);
+    public static final Item SPIRIT_OF_AIR = new ItemBase("misc_spirit_of_air").setCreativeTab(CreativeTabs.MISC);
+    public static final Item SPIRIT_OF_FIRE = new ItemBase("misc_spirit_of_fire").setCreativeTab(CreativeTabs.MISC);
 
 }
