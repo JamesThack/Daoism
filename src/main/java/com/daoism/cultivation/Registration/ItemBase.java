@@ -21,7 +21,7 @@ public class ItemBase extends Item {
      * Constructor, sets the unlocalised name and registers it
      * @param name Unlocalised name
      */
-    public ItemBase(String name) {
+    ItemBase(String name) {
         setUnlocalizedName(name);
         setRegistryName(name);
 
@@ -49,8 +49,6 @@ public class ItemBase extends Item {
                             PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This magnifying glass seems mysterious, maybe if you had more spiritual understanding you could use it", new Style().setColor(TextFormatting.GOLD));
                             System.out.println(e.getHand().toString());
                         }
-                    } else {
-
                     }
                 }
             }

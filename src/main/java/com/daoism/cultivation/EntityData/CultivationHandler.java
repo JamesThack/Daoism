@@ -7,6 +7,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Handles the injection of a capability and input/output of NBTTags
@@ -22,10 +23,10 @@ public class CultivationHandler implements ICapabilitySerializable<NBTTagCompoun
     /**
      * Creates a new instance of the capability injection
      */
-    CultivationCapability instance = CULTIVATION_CAPABILITY.getDefaultInstance();
+    private CultivationCapability instance = Objects.requireNonNull(CULTIVATION_CAPABILITY).getDefaultInstance();
 
     @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+    public boolean hasCapability(@Nonnull Capability<?> capability, EnumFacing facing) {
 
         return capability == CULTIVATION_CAPABILITY;
     }

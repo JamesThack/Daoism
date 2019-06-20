@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class ItemInit {
 
     //Food Items
-    public static final ArrayList<ItemFood> ITEMS = new ArrayList<>();
-    public static final Item AQUA_PILL = new ItemFoodBase(0,0,false,"food_aquapill").setAlwaysEdible().setCreativeTab(CreativeTabs.FOOD).setMaxStackSize(1);
+    static final ArrayList<ItemFood> ITEMS = new ArrayList<>();
+    static final Item AQUA_PILL = new ItemFoodBase(0,0,false,"food_aquapill").setAlwaysEdible().setCreativeTab(CreativeTabs.FOOD).setMaxStackSize(1);
 
     //Normal Items
-    public static final ArrayList<Item> ITEMS_REGULAR = new ArrayList<>();
+    static final ArrayList<Item> ITEMS_REGULAR = new ArrayList<>();
     public static final Item CULTIVATION_IDENTIFIER = new ItemBase("misc_magnifying_glass").setCreativeTab(CreativeTabs.MISC);
 
 }
