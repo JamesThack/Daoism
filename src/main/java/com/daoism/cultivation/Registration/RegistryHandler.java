@@ -1,6 +1,7 @@
 package com.daoism.cultivation.Registration;
 
 import com.daoism.cultivation.Daoism;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -24,6 +25,11 @@ public class RegistryHandler {
         event.getRegistry().registerAll(ItemInit.ITEMS_REGULAR.toArray(new Item[0]));
     }
 
+    @SubscribeEvent
+    public static void onBlockRegister(RegistryEvent.Register<Block> e) {
+        e.getRegistry().registerAll(BlockInit.blocks.toArray(new Block[0]));
+    }
+
     /**
      * Method is called to render models using proxy method
      * @param event The event data
@@ -45,6 +51,15 @@ public class RegistryHandler {
                 //Really fucking hope the code doesn't get here lmao
             }
         }
+
+        for(Block block : BlockInit.blocks) {
+            try {
+                Daoism.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0 , "inventories");
+            }catch(Exception e) {
+                //Really fucking hope the code doesn't get here lmao
+            }
+        }
+
     }
 
 }
