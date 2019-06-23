@@ -152,4 +152,5 @@ public class BlockPillFurnace extends BlockBase implements ITileEntityProvider {
     public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getIndex();
     }
+
 }

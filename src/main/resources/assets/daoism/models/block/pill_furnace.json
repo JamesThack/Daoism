@@ -1,0 +1,13 @@
+{
+  "parent": "block/orientable",
+  "textures":
+  {
+    "particle": "daoism:blocks/pill_furnace",
+    "up": "daoism:blocks/pill_furnace",
+    "down": "daoism:blocks/pill_furnace",
+    "north": "daoism:blocks/pill_furnace",
+    "east": "daoism:blocks/pill_furnace",
+    "south": "daoism:blocks/pill_furnace",
+    "west": "daoism:blocks/pill_furnace"
+  }
+}

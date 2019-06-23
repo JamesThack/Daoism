@@ -1,0 +1,13 @@
+{
+  "variants":
+  {
+    "cooking=false, facing=north": {"model":  "daoism:pill_furnace"},
+    "cooking=false, facing=east": {"model":  "daoism:pill_furnace", "y":  90},
+    "cooking=false, facing=south": {"model":  "daoism:pill_furnace", "y":  180},
+    "cooking=false, facing=west": {"model":  "daoism:pill_furnace", "y":  270},
+    "cooking=true, facing=north": {"model":  "daoism:lit_pill_furnace"},
+    "cooking=true, facing=east": {"model":  "daoism:lit_pill_furnace", "y":  90},
+    "cooking=true, facing=south": {"model":  "daoism:lit_pill_furnace", "y":  180},
+    "cooking=true, facing=west": {"model":  "daoism:lit_pill_furnace", "y":  270}
+  }
+}
