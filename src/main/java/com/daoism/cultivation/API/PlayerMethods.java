@@ -2,10 +2,13 @@ package com.daoism.cultivation.API;
 
 import com.daoism.cultivation.EntityData.CultivationCapability;
 import com.daoism.cultivation.EntityData.CultivationHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
@@ -14,6 +17,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -102,6 +106,31 @@ public class PlayerMethods {
      */
     public static void addEntityCultivation(int cult, EntityPlayer player) {
         PlayerMethods.getCultivationInstance(player).addCultivation(cult);
+    }
+
+    /**
+     * This method returns any entity that the player is looking directly at
+     * @param player The player
+     * @return An entity if there is one visible, null if not
+     */
+    public static Entity entityPlayerIsLookingAt(EntityPlayer player) {
+        for (int i = 4; i < 300; i++) {
+            RayTraceResult mop = player.rayTrace(i, 1.0F);
+
+            if(!player.getEntityWorld().getBlockState(mop.getBlockPos()).getBlock().getUnlocalizedName().equals("tile.air")) {
+                return null;
+            }
+            int x = mop.getBlockPos().getX();
+            int y = mop.getBlockPos().getY();
+            int z = mop.getBlockPos().getZ();
+
+            AxisAlignedBB radius = new AxisAlignedBB(x,y,z,x + 1,y + 1,z +1);
+            List<Entity> entities = player.getEntityWorld().getEntitiesWithinAABBExcludingEntity(player, radius);
+            for (Entity ent : entities) {
+                return ent;
+            }
+        }
+        return null;
     }
 
 }
