@@ -58,9 +58,14 @@ public class ItemBase extends Item {
                     }
                 } else if (PlayerMethods.isInHand(e.getEntityPlayer(), "item.misc_blink_ability", e)) {
                     EntityPlayer player = e.getEntityPlayer();
-                    RayTraceResult MOP = player.rayTrace(200, 1.0F);
-                    if(!player.getEntityWorld().getBlockState(MOP.getBlockPos()).getBlock().getUnlocalizedName().equals("tile.air")) {
-                        player.setPositionAndUpdate(MOP.getBlockPos().getX(), MOP.getBlockPos().getY(), MOP.getBlockPos().getZ());
+                    if(PlayerMethods.getEntityCultivationLevel(player) < 200) {
+                        PlayerMethods.sendMsgToPlayer(player, "You do not have enough cultivation to use this tome");
+                    } else {
+                        int traceDistance = 20 + ((PlayerMethods.getEntityCultivationLevel(player) - 200) /4 );
+                        RayTraceResult MOP = player.rayTrace(traceDistance, 1.0F);
+                        if(!player.getEntityWorld().getBlockState(MOP.getBlockPos()).getBlock().getUnlocalizedName().equals("tile.air")) {
+                              player.setPositionAndUpdate(MOP.getBlockPos().getX(), (MOP.getBlockPos().getY() + 1), MOP.getBlockPos().getZ());
+                    }
                     }
 
                 }

@@ -82,4 +82,8 @@ public class PlayerMethods {
         return ((player.getHeldItem(EnumHand.MAIN_HAND).getItem().getUnlocalizedName().equalsIgnoreCase(itemName) && e.getHand().equals(EnumHand.MAIN_HAND)) || (player.getHeldItem(EnumHand.OFF_HAND).getItem().getUnlocalizedName().equalsIgnoreCase(itemName) && e.getHand().equals(EnumHand.OFF_HAND)));
     }
 
+    public static void addEntityCultivation(int cult, EntityPlayer player) {
+        PlayerMethods.getCultivationInstance(player).addCultivation(cult);
+    }
+
 }
