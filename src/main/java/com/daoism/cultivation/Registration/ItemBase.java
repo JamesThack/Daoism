@@ -45,6 +45,10 @@ public class ItemBase extends Item {
         @SubscribeEvent
         public void onInteract(PlayerInteractEvent.RightClickItem e) {
             if(!e.getEntity().getEntityWorld().isRemote) {
+
+                /**
+                 * The code that handles magnifying glass events
+                 */
                 if (PlayerMethods.isInHand(e.getEntityPlayer(), "item.misc_magnifying_glass", e)) {
                     if(e.getEntityPlayer().isSneaking()) {
                         if (PlayerMethods.isPlayerCultivator(e.getEntityPlayer())) {
@@ -53,9 +57,11 @@ public class ItemBase extends Item {
                             PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This magnifying glass seems mysterious, maybe if you had more spiritual understanding you could use it", new Style().setColor(TextFormatting.GOLD));
                             System.out.println(e.getHand().toString());
                         }
-                    } else {
-
                     }
+
+                    /**
+                     * The code that handles the blink tome
+                     */
                 } else if (PlayerMethods.isInHand(e.getEntityPlayer(), "item.misc_blink_ability", e)) {
                     EntityPlayer player = e.getEntityPlayer();
                     if(PlayerMethods.getEntityCultivationLevel(player) < 200) {
@@ -67,7 +73,6 @@ public class ItemBase extends Item {
                               player.setPositionAndUpdate(MOP.getBlockPos().getX(), (MOP.getBlockPos().getY() + 1), MOP.getBlockPos().getZ());
                     }
                     }
-
                 }
             }
         }

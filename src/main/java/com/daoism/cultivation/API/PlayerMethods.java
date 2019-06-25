@@ -30,6 +30,12 @@ public class PlayerMethods {
         player.sendMessage(new TextComponentString(text) {});
     }
 
+    /**
+     * This method sends message to player but can handle style
+     * @param player The player
+     * @param text Text to send to player
+     * @param style Style formats
+     */
     public static void sendMsgToPlayer(EntityPlayer player, String text, Style style) {
         player.sendMessage(new TextComponentString(text).setStyle(style));
     }
@@ -78,10 +84,22 @@ public class PlayerMethods {
         return getCultivationInstance(player).getCultivationLevel();
     }
 
+    /**
+     * Can test if a player is holding an item (On and off hand)
+     * @param player The player
+     * @param itemName String of the item name (item.name)
+     * @param e The instance of player interact event
+     * @return Boolean if the player is holding an item
+     */
     public static boolean isInHand(EntityPlayer player, String itemName, PlayerInteractEvent e) {
         return ((player.getHeldItem(EnumHand.MAIN_HAND).getItem().getUnlocalizedName().equalsIgnoreCase(itemName) && e.getHand().equals(EnumHand.MAIN_HAND)) || (player.getHeldItem(EnumHand.OFF_HAND).getItem().getUnlocalizedName().equalsIgnoreCase(itemName) && e.getHand().equals(EnumHand.OFF_HAND)));
     }
 
+    /**
+     * Adds cultivation on to a player
+     * @param cult The cultivation to add on
+     * @param player The player
+     */
     public static void addEntityCultivation(int cult, EntityPlayer player) {
         PlayerMethods.getCultivationInstance(player).addCultivation(cult);
     }
