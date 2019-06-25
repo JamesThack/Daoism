@@ -60,8 +60,13 @@ public class ItemBase extends Item {
                         } else {
                             Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer());
                             if(entity != null) {
-                                PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), entity.getName());
-
+                                if (entity instanceof EntityPlayer) {
+                                    PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("The player " +
+                                            ((EntityPlayer)entity).getDisplayNameString() +
+                                            " has a cultivation level of " +
+                                            PlayerMethods.getEntityCultivationLevel((EntityPlayer) entity)),
+                                            new Style().setColor(TextFormatting.GOLD));
+                                }
                             }
                         }
                     } else {

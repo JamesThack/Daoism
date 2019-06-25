@@ -114,7 +114,7 @@ public class PlayerMethods {
      * @return An entity if there is one visible, null if not
      */
     public static Entity entityPlayerIsLookingAt(EntityPlayer player) {
-        for (int i = 4; i < 300; i++) {
+        for (int i = 1; i < 300; i++) {
             RayTraceResult mop = player.rayTrace(i, 1.0F);
 
             if(!player.getEntityWorld().getBlockState(mop.getBlockPos()).getBlock().getUnlocalizedName().equals("tile.air")) {
