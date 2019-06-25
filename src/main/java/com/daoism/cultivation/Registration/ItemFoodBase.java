@@ -5,6 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 /**
@@ -41,18 +43,11 @@ public class ItemFoodBase extends ItemFood {
                     if (player.isSneaking()) {
                         PlayerMethods.setPlayerCultivator(player, false);
                     } else {
-                        PlayerMethods.killPlayer(player);
+                        player.setHealth(3);
+                        PlayerMethods.sendMsgToPlayer(player, "The spiritual energy in the pill overwhelms you as your meridians are already open", new Style().setColor(TextFormatting.RED));
                     }
                 } else {
                     PlayerMethods.setPlayerCultivator(player, true);
-                }
-            }
-        } else {
-            if (stack.getItem().getUnlocalizedName().equalsIgnoreCase("item.food_aquapill")) {
-                if(PlayerMethods.isPlayerCultivator(player)) {
-                    if (!player.isSneaking()) {
-                        PlayerMethods.killPlayer(player);
-                    }
                 }
             }
         }
