@@ -29,6 +29,11 @@ public class CultivationControl {
         public int getCultivationLevel() {
             return cultivation;
         }
+
+        @Override
+        public void setCultivationLevel(int cult) {
+            this.cultivation = cult;
+        }
     }
 
 }
