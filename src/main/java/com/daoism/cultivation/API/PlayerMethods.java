@@ -1,9 +1,12 @@
 package com.daoism.cultivation.API;
 
+import com.daoism.cultivation.EntityData.CommonProxy;
 import com.daoism.cultivation.EntityData.CultivationCapability;
 import com.daoism.cultivation.EntityData.CultivationHandler;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
@@ -17,6 +20,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,20 +29,27 @@ import java.util.Objects;
  */
 public class PlayerMethods {
 
+    public PlayerMethods() {
+
+    }
+
     /**
      * Method to send messages to the player
+     *
      * @param player The player
-     * @param text Text to send to player
+     * @param text   Text to send to player
      */
     public static void sendMsgToPlayer(EntityPlayer player, String text) {
-        player.sendMessage(new TextComponentString(text) {});
+        player.sendMessage(new TextComponentString(text) {
+        });
     }
 
     /**
      * This method sends message to player but can handle style
+     *
      * @param player The player
-     * @param text Text to send to player
-     * @param style Style formats
+     * @param text   Text to send to player
+     * @param style  Style formats
      */
     public static void sendMsgToPlayer(EntityPlayer player, String text, Style style) {
         player.sendMessage(new TextComponentString(text).setStyle(style));
@@ -46,14 +57,16 @@ public class PlayerMethods {
 
     /**
      * Method to kill the player
+     *
      * @param player The player
      */
     public static void killPlayer(EntityPlayer player) {
-       player.addPotionEffect(new PotionEffect(Objects.requireNonNull(Potion.getPotionById(7)),1,30,false,false));
+        player.addPotionEffect(new PotionEffect(Objects.requireNonNull(Potion.getPotionById(7)), 1, 30, false, false));
     }
 
     /**
      * Returns an instance of the CultivationCapability to handle NBTTags
+     *
      * @param player The player
      * @return Instance of CultivationCapability
      */
@@ -63,7 +76,8 @@ public class PlayerMethods {
 
     /**
      * Sets the player or removes player as a cultivator
-     * @param player The player
+     *
+     * @param player      The player
      * @param cultivation True/False if the player should be cultivator
      */
     public static void setPlayerCultivator(EntityPlayer player, boolean cultivation) {
@@ -72,6 +86,7 @@ public class PlayerMethods {
 
     /**
      * Returns if the player is a cultivator
+     *
      * @param player The player
      * @return Boolean if the player is a cultivator
      */
@@ -81,6 +96,7 @@ public class PlayerMethods {
 
     /**
      * Returns the players cultivation level
+     *
      * @param player The player
      * @return An int of the cultivation level
      */
@@ -90,9 +106,10 @@ public class PlayerMethods {
 
     /**
      * Can test if a player is holding an item (On and off hand)
-     * @param player The player
+     *
+     * @param player   The player
      * @param itemName String of the item name (item.name)
-     * @param e The instance of player interact event
+     * @param e        The instance of player interact event
      * @return Boolean if the player is holding an item
      */
     public static boolean isInHand(EntityPlayer player, String itemName, PlayerInteractEvent e) {
@@ -101,7 +118,8 @@ public class PlayerMethods {
 
     /**
      * Adds cultivation on to a player
-     * @param cult The cultivation to add on
+     *
+     * @param cult   The cultivation to add on
      * @param player The player
      */
     public static void addEntityCultivation(int cult, EntityPlayer player) {
@@ -110,27 +128,58 @@ public class PlayerMethods {
 
     /**
      * This method returns any entity that the player is looking directly at
+     *
      * @param player The player
      * @return An entity if there is one visible, null if not
      */
     public static Entity entityPlayerIsLookingAt(EntityPlayer player) {
-        for (int i = 1; i < 300; i++) {
-            RayTraceResult mop = player.rayTrace(i, 1.0F);
+        return entityPlayerIsLookingAt(player, 300);
+    }
 
-            if(!player.getEntityWorld().getBlockState(mop.getBlockPos()).getBlock().getUnlocalizedName().equals("tile.air")) {
+    public static Entity entityPlayerIsLookingAt(EntityPlayer player, int maxDistance) {
+
+        for (int i = 1; i < maxDistance; i++) {
+            RayTraceResult mop = player.rayTrace(i, 1.0F);
+            try {
+                if (!isBlockPassable(player.getEntityWorld().getBlockState(mop.getBlockPos()).getBlock())) {
+                    return null;
+                }
+            } catch (Exception e) {
                 return null;
             }
             int x = mop.getBlockPos().getX();
             int y = mop.getBlockPos().getY();
             int z = mop.getBlockPos().getZ();
 
-            AxisAlignedBB radius = new AxisAlignedBB(x,y,z,x + 1,y + 1,z +1);
+            AxisAlignedBB radius = new AxisAlignedBB(x, y, z, x + 1, y + 1, z + 1);
             List<Entity> entities = player.getEntityWorld().getEntitiesWithinAABBExcludingEntity(player, radius);
             for (Entity ent : entities) {
                 return ent;
             }
         }
         return null;
+    }
+
+    public static boolean isBlockPassable(Block block) {
+
+        ArrayList<Block> bannedBlocks = new ArrayList<>();
+        bannedBlocks.add(Blocks.AIR);
+        bannedBlocks.add(Blocks.FIRE);
+        bannedBlocks.add(Blocks.VINE);
+        bannedBlocks.add(Blocks.TRIPWIRE);
+        bannedBlocks.add(Blocks.CARPET);
+        bannedBlocks.add(Blocks.GRASS);
+        bannedBlocks.add(Blocks.TALLGRASS);
+        bannedBlocks.add(Blocks.WATER);
+        bannedBlocks.add(Blocks.FLOWING_WATER);
+
+        for (Block current : bannedBlocks) {
+            if (current.equals(block)) {
+                return true;
+            }
+        }
+        return false;
+
     }
 
 }

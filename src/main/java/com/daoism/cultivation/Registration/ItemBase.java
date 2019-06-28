@@ -6,11 +6,14 @@ import com.daoism.cultivation.EntityData.CultivationCapability;
 import ibxm.Player;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -19,6 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Item Base for normal items, contains registration and event that happens when player clicks
@@ -60,13 +64,17 @@ public class ItemBase extends Item {
                         } else {
                             Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer());
                             if(entity != null) {
-                                if (entity instanceof EntityPlayer) {
+                                if (entity instanceof EntityPlayer && PlayerMethods.isPlayerCultivator( (EntityPlayer) entity)) {
                                     PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("The player " +
                                             ((EntityPlayer)entity).getDisplayNameString() +
                                             " has a cultivation level of " +
                                             PlayerMethods.getEntityCultivationLevel((EntityPlayer) entity)),
                                             new Style().setColor(TextFormatting.GOLD));
+                                } else {
+                                    PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This entity does not cultivate", new Style().setColor(TextFormatting.GOLD));
                                 }
+                            } else {
+                                PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "No entity found", new Style().setColor(TextFormatting.GOLD));
                             }
                         }
                     } else {
@@ -86,6 +94,16 @@ public class ItemBase extends Item {
                         if(!player.getEntityWorld().getBlockState(MOP.getBlockPos()).getBlock().getUnlocalizedName().equals("tile.air")) {
                               player.setPositionAndUpdate(MOP.getBlockPos().getX(), (MOP.getBlockPos().getY() + 1), MOP.getBlockPos().getZ());
                     }
+                    }
+                } else if(PlayerMethods.isInHand(e.getEntityPlayer(), "item.misc_attraction_ability", e)) {
+                    Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer());
+                    if (entity != null) {
+                        PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), entity.getName());
+                        Vec3d lookVec = e.getEntityPlayer().getLookVec();
+                        double x = lookVec.x;
+                        double y = lookVec.y;
+                        double z = lookVec.z;
+                        entity.setVelocity(x * 0.4, y * 1.6, z * 0.4);
                     }
                 }
             }

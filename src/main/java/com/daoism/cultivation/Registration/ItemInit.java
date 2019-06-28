@@ -20,5 +20,6 @@ public class ItemInit {
     public static final ArrayList<Item> ITEMS_REGULAR = new ArrayList<>();
     public static final Item CULTIVATION_IDENTIFIER = new ItemBase("misc_magnifying_glass").setCreativeTab(CreativeTabs.MISC);
     public static final Item BLINK_ABILITY = new ItemBase("misc_blink_ability").setCreativeTab(CreativeTabs.COMBAT);
+    public static final Item ATTRACTION_ABILITY = new ItemBase("misc_attraction_ability").setCreativeTab(CreativeTabs.COMBAT);
 
 }
