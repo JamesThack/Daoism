@@ -29,4 +29,9 @@ public interface CultivationCapability {
      */
     int getCultivationLevel();
 
+    /**
+     * Method to set the players cultivation level
+     */
+    void setCultivationLevel(int cult);
+
 }
