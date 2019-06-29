@@ -43,6 +43,10 @@ public class Daoism {
         proxy.init();
     }
 
+    /**
+     * All the logic to happen right when the server starts
+     * @param event The event data
+     */
     @EventHandler
     public void start(FMLServerStartingEvent event) {
         event.registerServerCommand(new DaoismCommand());

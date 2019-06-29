@@ -91,9 +91,10 @@ public class PlayerMethods {
     }
 
     /**
-     * Returns the players cultivation level
+     * Returns the players cultivation level with a maximum value
      *
      * @param player The player
+     * @param max The max value
      * @return An int of the cultivation level
      */
     public static int getEntityCultivationLevel(EntityPlayer player, int max) {
@@ -104,6 +105,11 @@ public class PlayerMethods {
         return  val;
     }
 
+    /**
+     * Returns the entities cultivation level
+     * @param player The player
+     * @return Cultivation Level
+     */
     public static int getEntityCultivationLevel(EntityPlayer player) {
         return getEntityCultivationLevel(player, 2147483647);
     }
@@ -131,15 +137,21 @@ public class PlayerMethods {
     }
 
     /**
-     * This method returns any entity that the player is looking directly at
+     * Calls the looking at method with default values
      *
      * @param player The player
-     * @return An entity if there is one visible, null if not
+     * @return An entity if one visible, null if not
      */
     public static Entity entityPlayerIsLookingAt(EntityPlayer player) {
         return entityPlayerIsLookingAt(player, 300);
     }
 
+    /**
+     * This method returns any entity that the player is looking directly at
+     * @param player The player
+     * @param maxDistance The maximum distance you want to search for
+     * @return An entity if there is one visible, null if not
+     */
     public static Entity entityPlayerIsLookingAt(EntityPlayer player, int maxDistance) {
 
         for (int i = 1; i < maxDistance; i++) {
@@ -164,26 +176,29 @@ public class PlayerMethods {
         return null;
     }
 
+    /**
+     * This method detects if a block is passable (things such as snow and air)
+     * @param block The block
+     * @return If the block is passable
+     */
     public static boolean isBlockPassable(Block block) {
-
-        ArrayList<Block> bannedBlocks = new ArrayList<>();
-        bannedBlocks.add(Blocks.AIR);
-        bannedBlocks.add(Blocks.FIRE);
-        bannedBlocks.add(Blocks.VINE);
-        bannedBlocks.add(Blocks.TRIPWIRE);
-        bannedBlocks.add(Blocks.CARPET);
-        bannedBlocks.add(Blocks.GRASS);
-        bannedBlocks.add(Blocks.TALLGRASS);
-        bannedBlocks.add(Blocks.WATER);
-        bannedBlocks.add(Blocks.FLOWING_WATER);
-
-        for (Block current : bannedBlocks) {
+        ArrayList<Block> thruBlocks = new ArrayList<>();
+        thruBlocks.add(Blocks.AIR);
+        thruBlocks.add(Blocks.FIRE);
+        thruBlocks.add(Blocks.VINE);
+        thruBlocks.add(Blocks.TRIPWIRE);
+        thruBlocks.add(Blocks.CARPET);
+        thruBlocks.add(Blocks.GRASS);
+        thruBlocks.add(Blocks.TALLGRASS);
+        thruBlocks.add(Blocks.WATER);
+        thruBlocks.add(Blocks.FLOWING_WATER);
+        thruBlocks.add(Blocks.SNOW_LAYER);
+        for (Block current : thruBlocks) {
             if (current.equals(block)) {
                 return true;
             }
         }
         return false;
-
     }
 
 }

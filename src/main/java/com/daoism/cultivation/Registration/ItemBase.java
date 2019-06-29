@@ -95,6 +95,9 @@ public class ItemBase extends Item {
                               player.setPositionAndUpdate(MOP.getBlockPos().getX(), (MOP.getBlockPos().getY() + 1), MOP.getBlockPos().getZ());
                     }
                     }
+                    /**
+                     * The code that handles the attraction tome
+                     */
                 } else if(PlayerMethods.isInHand(e.getEntityPlayer(), "item.misc_attraction_ability", e)) {
                     Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer(), (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer() )/ 15));
                     if (entity != null) {

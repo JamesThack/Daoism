@@ -9,18 +9,37 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 
+/**
+ * This is the command base for the /daoism command
+ */
 public class DaoismCommand extends CommandBase {
 
+    /**
+     * Gets the name of the command
+     * @return The name of the command
+     */
     @Override
     public String getName() {
         return "daoism";
     }
 
+    /**
+     * Returns the usage of the command
+     * @param sender The sender
+     * @return The command usage
+     */
     @Override
     public String getUsage(ICommandSender sender) {
         return "command.daoism.usage";
     }
 
+    /**
+     * This is where all the code related to running the command works
+     * @param server An instance of the server
+     * @param sender The sender
+     * @param args Any arguments with the command
+     * @throws CommandException
+     */
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         if (sender instanceof EntityPlayer) {
@@ -41,4 +60,5 @@ public class DaoismCommand extends CommandBase {
             }
         }
     }
+
 }
