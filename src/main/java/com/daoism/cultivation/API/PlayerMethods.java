@@ -29,10 +29,6 @@ import java.util.Objects;
  */
 public class PlayerMethods {
 
-    public PlayerMethods() {
-
-    }
-
     /**
      * Method to send messages to the player
      *
@@ -100,8 +96,16 @@ public class PlayerMethods {
      * @param player The player
      * @return An int of the cultivation level
      */
+    public static int getEntityCultivationLevel(EntityPlayer player, int max) {
+        int val = getCultivationInstance(player).getCultivationLevel();
+        if (val >= max) {
+            return max;
+        }
+        return  val;
+    }
+
     public static int getEntityCultivationLevel(EntityPlayer player) {
-        return getCultivationInstance(player).getCultivationLevel();
+        return getEntityCultivationLevel(player, 2147483647);
     }
 
     /**

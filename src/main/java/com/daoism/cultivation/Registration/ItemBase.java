@@ -96,14 +96,17 @@ public class ItemBase extends Item {
                     }
                     }
                 } else if(PlayerMethods.isInHand(e.getEntityPlayer(), "item.misc_attraction_ability", e)) {
-                    Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer());
+                    Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer(), (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer() )/ 15));
                     if (entity != null) {
-                        PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), entity.getName());
                         Vec3d lookVec = e.getEntityPlayer().getLookVec();
-                        double x = lookVec.x;
-                        double y = lookVec.y;
-                        double z = lookVec.z;
-                        entity.setVelocity(x * 0.4, y * 1.6, z * 0.4);
+                        double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), 8000) / 4000.0));
+                        double y = (((lookVec.y + 0.5) * 0.6) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), 7000) / 4000.0));
+                        double z = ((lookVec.z * 0.3) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), 8000) / 4000.0));
+                        if (e.getEntityPlayer().isSneaking()) {
+                            entity.setVelocity(-x, (-y * 2), -z);
+                        } else {
+                            entity.setVelocity(x, y, z);
+                        }
                     }
                 }
             }
