@@ -17,21 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventsClass {
 
     /**
-     * This event is called when the player interacts with the world
-     * @param e The event data
-     */
-    @SubscribeEvent
-    public void interact(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent e) {
-        EntityPlayer player = e.player;
-        CultivationCapability cult = player.getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
-        if (cult.canCultivate()) {
-                PlayerMethods.sendMsgToPlayer(e.player, "You just cultivated");
-        } else {
-            PlayerMethods.sendMsgToPlayer(e.player, "You can't cultivate");
-        }
-    }
-
-    /**
      * This method is important, it ensures that whenever a player logs out/dies/changes dimension the NBT data is
      * copied over and not lost
       * @param e The event data
@@ -42,6 +27,7 @@ public class EventsClass {
             CultivationCapability cult = player.getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
             CultivationCapability oldCult = e.getOriginal().getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
             cult.setCultivate(oldCult.canCultivate());
+            cult.setCultivationLevel(oldCult.getCultivationLevel());
     }
 
     /**

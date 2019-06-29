@@ -1,11 +1,13 @@
 package com.daoism.cultivation;
 
+import com.daoism.cultivation.Commands.DaoismCommand;
 import com.daoism.cultivation.EntityData.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = Daoism.MODID, name = Daoism.NAME, version = Daoism.VERSION)
 
@@ -39,6 +41,15 @@ public class Daoism {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init();
+    }
+
+    /**
+     * All the logic to happen right when the server starts
+     * @param event The event data
+     */
+    @EventHandler
+    public void start(FMLServerStartingEvent event) {
+        event.registerServerCommand(new DaoismCommand());
     }
 
 }

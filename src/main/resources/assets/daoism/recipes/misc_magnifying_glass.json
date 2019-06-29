@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+          [
+              "AAG",
+              "ASA",
+              "SAA"
+          ],
+  "key":
+  {
+    "A":
+    {
+      "item": "minecraft:air"
+    },
+    "G":
+    {
+      "item": "minecraft:glass"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+  "result":
+  {
+    "item": "daoism:misc_magnifying_glass"
+  }
+}

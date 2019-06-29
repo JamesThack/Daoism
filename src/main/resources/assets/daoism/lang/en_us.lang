@@ -1,2 +1,5 @@
 item.food_aquapill.name=Aqua Pill
 item.misc_magnifying_glass.name=Spiritual Identifier
+item.misc_blink_ability.name=Medium Tome: Blink
+
+command.daoism.usage=/daoism help
