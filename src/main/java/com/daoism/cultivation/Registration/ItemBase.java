@@ -99,12 +99,20 @@ public class ItemBase extends Item {
                      * The code that handles the attraction tome
                      */
                 } else if(PlayerMethods.isInHand(e.getEntityPlayer(), "item.misc_attraction_ability", e)) {
-                    Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer(), (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer() )/ 15));
+                    Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer(), (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer() )/ 25));
                     if (entity != null) {
                         Vec3d lookVec = e.getEntityPlayer().getLookVec();
-                        double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), 8000) / 4000.0));
-                        double y = (((lookVec.y + 0.5) * 0.6) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), 7000) / 4000.0));
-                        double z = ((lookVec.z * 0.3) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), 8000) / 4000.0));
+                        double maxer = 4000;
+                        int topper = 8000;
+                        if (entity instanceof  EntityLiving) {
+                            maxer = ((EntityLiving) entity).getMaxHealth() * 200;
+                            System.out.println(maxer);
+                            topper = (int) maxer * 2;
+                            System.out.println(topper);
+                        }
+                        double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), topper) / maxer));
+                        double y = (((lookVec.y + 0.5) * 0.6) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), topper) / maxer));
+                        double z = ((lookVec.z * 0.3) * (PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer(), topper) / maxer));
                         if (e.getEntityPlayer().isSneaking()) {
                             entity.setVelocity(-x, (-y * 2), -z);
                         } else {
