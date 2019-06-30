@@ -41,7 +41,6 @@ public class Blink extends ItemBase {
                     } else {
                         cooldown = ((8000 - PlayerMethods.getEntityCultivationLevel(player)) / 66) * 20;
                     }
-                    System.out.println(cooldown);
                     player.getCooldownTracker().setCooldown(this, cooldown);
                 }
             }
