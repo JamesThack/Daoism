@@ -41,7 +41,6 @@ public class Daoism {
      */
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        EntityInit.registerEntities();
         proxy.preInit(event);
     }
 

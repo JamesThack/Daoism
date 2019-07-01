@@ -3,6 +3,7 @@ package com.daoism.cultivation.Registration;
 import com.daoism.cultivation.EntityData.CommonProxy;
 import com.daoism.cultivation.EntityData.CultivationCapability;
 import com.daoism.cultivation.EntityData.CultivationControl;
+import com.daoism.cultivation.EntityData.EntityInit;
 import com.daoism.cultivation.EntityData.Storage;
 import com.daoism.cultivation.EventsClass;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -20,6 +21,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
+        EntityInit.registerEntities();
+        RenderHandler.registerEntityRenders();
     }
     @Override
     public void init(FMLInitializationEvent event) {
