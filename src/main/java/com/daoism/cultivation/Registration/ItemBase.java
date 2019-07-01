@@ -12,6 +12,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
+import java.util.Vector;
+
 /**
  * Item Base for normal items, contains registration and event that happens when player clicks
  */
@@ -19,9 +22,10 @@ public class ItemBase extends Item {
 
     /**
      * Constructor, sets the unlocalised name and registers it
+     *
      * @param name Unlocalised name
      */
-    ItemBase(String name) {
+    public ItemBase(String name) {
         setUnlocalizedName(name);
         setRegistryName(name);
 
@@ -40,17 +44,7 @@ public class ItemBase extends Item {
         @SideOnly(Side.CLIENT)
         @SubscribeEvent
         public void onInteract(PlayerInteractEvent.RightClickItem e) {
-            if(!e.getEntity().getEntityWorld().isRemote) {
-                if ((e.getEntityPlayer().getHeldItem(EnumHand.MAIN_HAND).getItem().getUnlocalizedName().equalsIgnoreCase("item.misc_magnifying_glass") && e.getHand().equals(EnumHand.MAIN_HAND)) || (e.getEntityPlayer().getHeldItem(EnumHand.OFF_HAND).getItem().getUnlocalizedName().equalsIgnoreCase("item.misc_magnifying_glass") && e.getHand().equals(EnumHand.OFF_HAND))) {
-                    if(e.getEntityPlayer().isSneaking()) {
-                        if (PlayerMethods.isPlayerCultivator(e.getEntityPlayer())) {
-                            PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("Your current cultivation level is " + PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer())), new Style().setColor(TextFormatting.GOLD));
-                        } else {
-                            PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This magnifying glass seems mysterious, maybe if you had more spiritual understanding you could use it", new Style().setColor(TextFormatting.GOLD));
-                            System.out.println(e.getHand().toString());
-                        }
-                    }
-                }
+            if (!e.getEntity().getEntityWorld().isRemote) {
             }
         }
 

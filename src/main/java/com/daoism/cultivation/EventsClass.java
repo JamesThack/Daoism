@@ -42,6 +42,7 @@ public class EventsClass {
             CultivationCapability cult = player.getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
             CultivationCapability oldCult = e.getOriginal().getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
             cult.setCultivate(oldCult.canCultivate());
+            cult.setCultivationLevel(oldCult.getCultivationLevel());
     }
 
     /**

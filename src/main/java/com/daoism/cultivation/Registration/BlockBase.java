@@ -11,10 +11,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class handles the creation of block creation and all code related to placing/breaking blocks
+ */
 public class BlockBase {
 
+    /**
+     * This class handles all of the block related events
+     */
     public static class BreakHandler {
 
+        /**
+         * This event runs whenever a player breaks a block
+         * @param e The harvest event
+         */
         @SubscribeEvent
         public void onBreak(BlockEvent.HarvestDropsEvent e) {
             if(e.getDrops() != null) {
@@ -29,5 +39,7 @@ public class BlockBase {
                 }
             }
         }
+
     }
+
 }
