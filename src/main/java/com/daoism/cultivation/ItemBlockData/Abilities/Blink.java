@@ -21,8 +21,6 @@ public class Blink extends ItemBase {
         this.setMaxStackSize(1);
     }
 
-    private int abilityCoolDown = 0;
-
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack curItem = player.getHeldItem(handIn);

@@ -31,6 +31,7 @@ public class ItemBase extends Item {
 
     /**
      * Constructor, sets the unlocalised name and registers it
+     *
      * @param name Unlocalised name
      */
     public ItemBase(String name) {
@@ -47,40 +48,13 @@ public class ItemBase extends Item {
 
         /**
          * Event that runs whenever player clicks
+         *
          * @param e The event data
          */
         @SideOnly(Side.CLIENT)
         @SubscribeEvent
         public void onInteract(PlayerInteractEvent.RightClickItem e) {
-            if(!e.getEntity().getEntityWorld().isRemote) {
-
-                /**
-                 * The code that handles magnifying glass events
-                 */
-                if (PlayerMethods.isInHand(e.getEntityPlayer(), "item.misc_magnifying_glass", e)) {
-                    if(PlayerMethods.isPlayerCultivator(e.getEntityPlayer())) {
-                        if (e.getEntityPlayer().isSneaking()) {
-                            PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("Your current cultivation level is " + PlayerMethods.getEntityCultivationLevel(e.getEntityPlayer())), new Style().setColor(TextFormatting.GOLD));
-                        } else {
-                            Entity entity = PlayerMethods.entityPlayerIsLookingAt(e.getEntityPlayer());
-                            if(entity != null) {
-                                if (entity instanceof EntityPlayer && PlayerMethods.isPlayerCultivator( (EntityPlayer) entity)) {
-                                    PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), ("The player " +
-                                            ((EntityPlayer)entity).getDisplayNameString() +
-                                            " has a cultivation level of " +
-                                            PlayerMethods.getEntityCultivationLevel((EntityPlayer) entity)),
-                                            new Style().setColor(TextFormatting.GOLD));
-                                } else {
-                                    PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This entity does not cultivate", new Style().setColor(TextFormatting.GOLD));
-                                }
-                            } else {
-                                PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "No entity found", new Style().setColor(TextFormatting.GOLD));
-                            }
-                        }
-                    } else {
-                        PlayerMethods.sendMsgToPlayer(e.getEntityPlayer(), "This magnifying glass seems mysterious, maybe if you had more spiritual understanding you could use it", new Style().setColor(TextFormatting.GOLD));
-                    }
-                }
+            if (!e.getEntity().getEntityWorld().isRemote) {
             }
         }
 
