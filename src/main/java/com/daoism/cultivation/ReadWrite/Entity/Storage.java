@@ -1,4 +1,4 @@
-package com.daoism.cultivation.EntityData;
+package com.daoism.cultivation.ReadWrite.Entity;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;

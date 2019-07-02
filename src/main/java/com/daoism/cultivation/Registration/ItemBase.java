@@ -1,19 +1,10 @@
 package com.daoism.cultivation.Registration;
 
-import ca.weblite.objc.Client;
-import com.daoism.cultivation.API.PlayerMethods;
-import com.daoism.cultivation.EntityData.CultivationCapability;
 import net.minecraft.item.Item;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
-import java.util.Vector;
 
 /**
  * Item Base for normal items, contains registration and event that happens when player clicks

@@ -1,4 +1,4 @@
-package com.daoism.cultivation.EntityData;
+package com.daoism.cultivation.ReadWrite.Entity;
 
 /**
  * Implementation of the CultivationCapability interface, used to control cultivation

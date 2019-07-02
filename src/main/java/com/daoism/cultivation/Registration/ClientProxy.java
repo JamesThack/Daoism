@@ -1,11 +1,14 @@
 package com.daoism.cultivation.Registration;
 
 import com.daoism.cultivation.EntityData.CommonProxy;
-import com.daoism.cultivation.EntityData.CultivationCapability;
-import com.daoism.cultivation.EntityData.CultivationControl;
+import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
+import com.daoism.cultivation.ReadWrite.Entity.CultivationControl;
 import com.daoism.cultivation.EntityData.EntityInit;
-import com.daoism.cultivation.EntityData.Storage;
+import com.daoism.cultivation.ReadWrite.Entity.Storage;
 import com.daoism.cultivation.EventsClass;
+import com.daoism.cultivation.ReadWrite.item.CoreCapability;
+import com.daoism.cultivation.ReadWrite.item.CoreControl;
+import com.daoism.cultivation.ReadWrite.item.CoreStorage;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
@@ -22,11 +25,12 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         EntityInit.registerEntities();
-        RenderHandler.registerEntityRenders();
+        //RenderHandler.registerEntityRenders();
     }
     @Override
     public void init(FMLInitializationEvent event) {
         CapabilityManager.INSTANCE.register(CultivationCapability.class, new Storage(), CultivationControl.CultivationHandler::new);
+        CapabilityManager.INSTANCE.register(CoreCapability.class, new CoreStorage(), CoreControl::new);
         MinecraftForge.EVENT_BUS.register(new ItemBase.ItemEventsHandler());
         MinecraftForge.EVENT_BUS.register(new EventsClass());
         MinecraftForge.EVENT_BUS.register(new BlockBase.BreakHandler());

@@ -2,6 +2,7 @@ package com.daoism.cultivation.Registration;
 
 import com.daoism.cultivation.ItemBlockData.Abilities.Attraction;
 import com.daoism.cultivation.ItemBlockData.Abilities.Blink;
+import com.daoism.cultivation.ItemBlockData.Food.GoldenCore;
 import com.daoism.cultivation.ItemBlockData.Misc.SpiritualIdentifier;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -18,6 +19,7 @@ public class ItemInit {
     //Food Items
     public static final ArrayList<ItemFood> ITEMS = new ArrayList<>();
     public static final Item AQUA_PILL = new ItemFoodBase(0,0,false,"food_aquapill").setAlwaysEdible().setCreativeTab(CreativeTabs.FOOD).setMaxStackSize(1);
+    public static final Item GOLDEN_CORE = new GoldenCore(0, 0, false, "food_golden_core").setAlwaysEdible().setCreativeTab(CreativeTabs.FOOD).setMaxStackSize(1);
 
     //Normal Items
     public static final ArrayList<Item> ITEMS_REGULAR = new ArrayList<>();

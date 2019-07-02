@@ -1,4 +1,4 @@
-package com.daoism.cultivation.EntityData;
+package com.daoism.cultivation.ReadWrite.Entity;
 
 /**
  * Interface that is used to control the player's cultivation
