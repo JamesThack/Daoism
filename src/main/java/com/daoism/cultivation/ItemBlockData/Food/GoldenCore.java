@@ -1,5 +1,6 @@
 package com.daoism.cultivation.ItemBlockData.Food;
 
+import com.daoism.cultivation.API.CalebMathHelper;
 import com.daoism.cultivation.API.ItemMethods;
 import com.daoism.cultivation.API.PlayerMethods;
 import com.daoism.cultivation.Registration.ItemFoodBase;
@@ -9,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 public class GoldenCore extends ItemFoodBase {
@@ -31,8 +34,10 @@ public class GoldenCore extends ItemFoodBase {
     @Override
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if(!worldIn.isRemote) {
-            PlayerMethods.sendMsgToPlayer(player, "Ye");
-            PlayerMethods.sendMsgToPlayer(player , ("Level: " + ItemMethods.getLevel(stack)));
+            int addLevel = ItemMethods.getLevel(stack);
+            addLevel *= CalebMathHelper.randomFloatGenerator(0.3F,0.6F);
+            PlayerMethods.addEntityCultivation(addLevel, player);
+            PlayerMethods.sendMsgToPlayer(player, ("Your cultivation has increased by " + addLevel), new Style().setColor(TextFormatting.GOLD));
         }
     }
 
