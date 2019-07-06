@@ -34,21 +34,6 @@ public class EntitySpirit extends EntityZombie {
         super.setDropItemsWhenDead(dropWhenDead);
     }
 
-    public void addDrop(ItemStack items) {
-        stack.add(items);
-    }
-
-    @Override
-    public void onDeath(DamageSource cause) {
-        for (ItemStack stack : stack) {
-            this.entityDropItem(stack, 0);
-        }
-
-    }
-
-    public void setMaxHealth(int health) {
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).applyModifier(new AttributeModifier("Ye", health, 1));
-}
 
 
 }

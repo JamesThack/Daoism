@@ -35,6 +35,7 @@ public class GoldenCore extends ItemFoodBase {
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         if(!worldIn.isRemote) {
             int addLevel = ItemMethods.getLevel(stack);
+            System.out.println(CalebMathHelper.randomFloatGenerator(0.3F,0.6F));
             addLevel *= CalebMathHelper.randomFloatGenerator(0.3F,0.6F);
             PlayerMethods.addEntityCultivation(addLevel, player);
             PlayerMethods.sendMsgToPlayer(player, ("Your cultivation has increased by " + addLevel), new Style().setColor(TextFormatting.GOLD));
