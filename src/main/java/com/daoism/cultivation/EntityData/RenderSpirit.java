@@ -18,7 +18,6 @@ public class RenderSpirit extends RenderLiving<EntitySpirit> {
         super(manager, new ModelSpirit(), 0.5F);
     }
 
-    @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntitySpirit entity) {
         return TEXTURES;
