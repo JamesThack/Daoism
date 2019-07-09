@@ -4,10 +4,6 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-/**
- * ModelZombie - Either Mojang or a mod author
- * Created using Tabula 7.0.1
- */
 public class ModelSpirit extends ModelBase {
     public ModelRenderer LeftArm;
     public ModelRenderer LeftLeg;

@@ -13,9 +13,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class Attraction extends ItemBase {
+
     /**
      * Constructor, sets the unlocalised name and registers it
-     *
      * @param name Unlocalised name
      */
     public Attraction(String name) {
@@ -23,6 +23,14 @@ public class Attraction extends ItemBase {
         this.setMaxStackSize(1);
     }
 
+    /**
+     * This method runs when the item is right clicked. For this abilitity it calculates using health how much
+     * cultivation is needed to move an entity then pulls/pushes entity.
+     * @param worldIn The world
+     * @param player The player
+     * @param handIn The hand
+     * @return The result of the action
+     */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack curItem = player.getHeldItem(handIn);
@@ -50,4 +58,5 @@ public class Attraction extends ItemBase {
             }
         } return new ActionResult<>(EnumActionResult.SUCCESS, curItem);
     }
+
 }
