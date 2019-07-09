@@ -1,12 +1,13 @@
 package com.daoism.cultivation.API;
 
-import com.daoism.cultivation.EntityData.CommonProxy;
-import com.daoism.cultivation.EntityData.CultivationCapability;
-import com.daoism.cultivation.EntityData.CultivationHandler;
+import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
+import com.daoism.cultivation.ReadWrite.Entity.CultivationHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
@@ -14,11 +15,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,8 +119,8 @@ public class PlayerMethods {
      * @param e        The instance of player interact event
      * @return Boolean if the player is holding an item
      */
-    public static boolean isInHand(EntityPlayer player, String itemName, PlayerInteractEvent e) {
-        return ((player.getHeldItem(EnumHand.MAIN_HAND).getItem().getUnlocalizedName().equalsIgnoreCase(itemName) && e.getHand().equals(EnumHand.MAIN_HAND)) || (player.getHeldItem(EnumHand.OFF_HAND).getItem().getUnlocalizedName().equalsIgnoreCase(itemName) && e.getHand().equals(EnumHand.OFF_HAND)));
+    public static boolean isInHand(EntityPlayer player, Item itemName, PlayerInteractEvent e) {
+        return ((player.getHeldItem(EnumHand.MAIN_HAND).getItem().equals(itemName) && e.getHand().equals(EnumHand.MAIN_HAND)) || (player.getHeldItem(EnumHand.OFF_HAND).getItem().equals(itemName) && e.getHand().equals(EnumHand.OFF_HAND)));
     }
 
     /**

@@ -1,12 +1,26 @@
 package com.daoism.cultivation;
 
-import com.daoism.cultivation.EntityData.CultivationCapability;
-import com.daoism.cultivation.EntityData.CultivationHandler;
+import com.daoism.cultivation.API.ItemMethods;
 import com.daoism.cultivation.API.PlayerMethods;
+import com.daoism.cultivation.EntityData.EntitySpirit;
+import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
+import com.daoism.cultivation.ReadWrite.Entity.CultivationHandler;
+import com.daoism.cultivation.ReadWrite.item.CoreHandler;
+import com.daoism.cultivation.Registration.ItemInit;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -38,6 +52,85 @@ public class EventsClass {
     public void onAttach(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof EntityPlayer) {
             event.addCapability(new ResourceLocation(Daoism.MODID, Daoism.NAME), new CultivationHandler());
+        }
+    }
+
+    /**
+     * This method ties the item data to cores
+     * @param e The event data
+     */
+    @SubscribeEvent
+    public void onAttachItem(AttachCapabilitiesEvent<ItemStack> e) {
+        if (e.getObject().getItem().equals(ItemInit.GOLDEN_CORE)) {
+            e.addCapability(new ResourceLocation(Daoism.MODID, Daoism.NAME), new CoreHandler());
+        }
+
+    }
+
+    /**
+     * This event directly handles the attacking of an entity. Damage can't be controlled here but the event can be cancelled
+     * @param e The event data
+     */
+    @SubscribeEvent
+    public void onEntityAttack(LivingAttackEvent e) {
+        if(e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            if (e.getSource().equals(DamageSource.FALL)) {
+                float total = e.getAmount();
+                for (int i = 0; i < PlayerMethods.getEntityCultivationLevel(player); i+= 1000) {
+                    total -=1;
+                    System.out.println(total);
+                    if (total < 0) {
+                        System.out.println("LOL");
+                        e.setCanceled(true);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * This event handles an entity being damaged, here you can change the damage
+     * @param e The event data
+     */
+    @SubscribeEvent
+    public void onEntityDamage(LivingHurtEvent e) {
+        if(e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            if (e.getSource().equals(DamageSource.FALL)) {
+                float total = e.getAmount();
+                for (int i = 0; i < PlayerMethods.getEntityCultivationLevel(player); i+= 1000) {
+                    total -=1;
+                    System.out.println(total);
+                    if (total < 0) {
+                        System.out.println("LOL");
+                        e.setCanceled(true);
+                        total = 0;
+                        break;
+                    }
+                } e.setAmount(total);
+            }
+        }
+    }
+
+    /**
+     * Whenever an entity dies this code is run
+     * @param e The event data
+     */
+    @SubscribeEvent
+    public void onEntityDeath(LivingDeathEvent e) {
+        if(!e.getEntityLiving().getEntityWorld().isRemote) {
+            BlockPos pos = e.getEntityLiving().getPosition();
+            //EntitySpirit entity = new EntitySpirit(e.getEntityLiving().getEntityWorld());
+            //e.getEntityLiving().getEntityWorld().spawnEntity(entity);
+            //entity.setMaxHealth(1);
+            //entity.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
+            ItemStack item = new ItemStack(ItemInit.GOLDEN_CORE, 1);
+            ItemMethods.setLevel(item, (int) e.getEntityLiving().getMaxHealth() * 2);
+            item.setStackDisplayName( ("Golden Core Level " + (int) e.getEntityLiving().getMaxHealth() * 2) );
+            EntityItem drop = new EntityItem(e.getEntityLiving().getEntityWorld(), pos.getX(), pos.getY(), pos.getZ(), item);
+            e.getEntityLiving().getEntityWorld().spawnEntity(drop);
         }
     }
 

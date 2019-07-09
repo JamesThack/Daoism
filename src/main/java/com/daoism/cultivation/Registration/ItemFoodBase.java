@@ -38,7 +38,7 @@ public class ItemFoodBase extends ItemFood {
     protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
         super.onFoodEaten(stack, worldIn, player);
         if(!worldIn.isRemote) {
-            if (stack.getItem().getUnlocalizedName().equalsIgnoreCase("item.food_aquapill")) {
+            if (stack.getItem().equals(ItemInit.AQUA_PILL)) {
                 if(PlayerMethods.isPlayerCultivator(player)) {
                     if (player.isSneaking()) {
                         PlayerMethods.setPlayerCultivator(player, false);
