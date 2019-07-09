@@ -12,12 +12,15 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -58,6 +61,45 @@ public class EventsClass {
             e.addCapability(new ResourceLocation(Daoism.MODID, Daoism.NAME), new CoreHandler());
         }
 
+    }
+
+    @SubscribeEvent
+    public void onEntityAttack(LivingAttackEvent e) {
+        if(e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            if (e.getSource().equals(DamageSource.FALL)) {
+                float total = e.getAmount();
+                for (int i = 0; i < PlayerMethods.getEntityCultivationLevel(player); i+= 1000) {
+                    total -=1;
+                    System.out.println(total);
+                    if (total < 0) {
+                        System.out.println("LOL");
+                        e.setCanceled(true);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onEntityDamage(LivingHurtEvent e) {
+        if(e.getEntity() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) e.getEntity();
+            if (e.getSource().equals(DamageSource.FALL)) {
+                float total = e.getAmount();
+                for (int i = 0; i < PlayerMethods.getEntityCultivationLevel(player); i+= 1000) {
+                    total -=1;
+                    System.out.println(total);
+                    if (total < 0) {
+                        System.out.println("LOL");
+                        e.setCanceled(true);
+                        total = 0;
+                        break;
+                    }
+                } e.setAmount(total);
+            }
+        }
     }
 
     @SubscribeEvent

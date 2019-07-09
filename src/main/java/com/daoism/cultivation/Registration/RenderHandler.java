@@ -14,7 +14,8 @@ public class RenderHandler {
 
             @Override
             public Render<? super EntitySpirit> createRenderFor(RenderManager manager) {
-                return new RenderSpirit(manager);
+                //return new RenderSpirit(manager);
+                return null;
             }
         });
     }
