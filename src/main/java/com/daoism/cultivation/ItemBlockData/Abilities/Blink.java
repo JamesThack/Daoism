@@ -11,6 +11,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class Blink extends ItemBase {
+
     /**
      * Constructor, sets the unlocalised name and registers it
      *
@@ -21,6 +22,14 @@ public class Blink extends ItemBase {
         this.setMaxStackSize(1);
     }
 
+    /**
+     * Method runs when right clicked with item. For this item teleports the player within a set distance (based on
+     * cultivation) and sets a regen time.
+     * @param worldIn
+     * @param player
+     * @param handIn
+     * @return
+     */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack curItem = player.getHeldItem(handIn);
@@ -45,4 +54,5 @@ public class Blink extends ItemBase {
         } return new ActionResult<>(EnumActionResult.SUCCESS, curItem);
 
     }
+
 }

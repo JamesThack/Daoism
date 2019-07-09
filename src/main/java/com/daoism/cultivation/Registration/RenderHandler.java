@@ -7,11 +7,16 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
+/**
+ * Handles the rendering for entities
+ */
 public class RenderHandler {
 
+    /**
+     * Register entities
+     */
     public static void registerEntityRenders() {
         RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new IRenderFactory<EntitySpirit>() {
-
             @Override
             public Render<? super EntitySpirit> createRenderFor(RenderManager manager) {
                 //return new RenderSpirit(manager);
@@ -19,4 +24,5 @@ public class RenderHandler {
             }
         });
     }
+
 }

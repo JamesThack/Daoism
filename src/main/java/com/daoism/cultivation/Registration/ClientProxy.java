@@ -20,6 +20,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.util.Objects;
 
+/**
+ * The class to handle all code client side
+ */
 public class ClientProxy extends CommonProxy {
 
     @Override

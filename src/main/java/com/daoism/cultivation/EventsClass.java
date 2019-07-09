@@ -55,6 +55,10 @@ public class EventsClass {
         }
     }
 
+    /**
+     * This method ties the item data to cores
+     * @param e The event data
+     */
     @SubscribeEvent
     public void onAttachItem(AttachCapabilitiesEvent<ItemStack> e) {
         if (e.getObject().getItem().equals(ItemInit.GOLDEN_CORE)) {
@@ -63,6 +67,10 @@ public class EventsClass {
 
     }
 
+    /**
+     * This event directly handles the attacking of an entity. Damage can't be controlled here but the event can be cancelled
+     * @param e The event data
+     */
     @SubscribeEvent
     public void onEntityAttack(LivingAttackEvent e) {
         if(e.getEntity() instanceof EntityPlayer) {
@@ -82,6 +90,10 @@ public class EventsClass {
         }
     }
 
+    /**
+     * This event handles an entity being damaged, here you can change the damage
+     * @param e The event data
+     */
     @SubscribeEvent
     public void onEntityDamage(LivingHurtEvent e) {
         if(e.getEntity() instanceof EntityPlayer) {
@@ -102,6 +114,10 @@ public class EventsClass {
         }
     }
 
+    /**
+     * Whenever an entity dies this code is run
+     * @param e The event data
+     */
     @SubscribeEvent
     public void onEntityDeath(LivingDeathEvent e) {
         if(!e.getEntityLiving().getEntityWorld().isRemote) {

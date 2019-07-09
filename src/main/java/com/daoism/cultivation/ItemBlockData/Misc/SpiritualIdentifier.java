@@ -25,6 +25,14 @@ public class SpiritualIdentifier extends ItemBase {
         this.setMaxStackSize(1);
     }
 
+    /**
+     * This method runs when the item is right clicked. For this item it scans for an entity (or does the user if
+     * sneaking) and returns the cultivation level
+     * @param worldIn
+     * @param player
+     * @param handIn
+     * @return
+     */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack item = player.getHeldItem(handIn);
@@ -54,4 +62,5 @@ public class SpiritualIdentifier extends ItemBase {
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, item);
     }
+
 }
