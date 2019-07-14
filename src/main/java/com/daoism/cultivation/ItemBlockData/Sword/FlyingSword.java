@@ -12,6 +12,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import java.util.UUID;
+
 public class FlyingSword extends ItemBase {
     /**
      * Constructor, sets the unlocalised name and registers it
@@ -27,6 +29,8 @@ public class FlyingSword extends ItemBase {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if(!worldIn.isRemote) {
                 Vec3d lookVec = playerIn.getLookVec();
+                PlayerFly flying = new PlayerFly(playerIn);
+                flying.st
                 double maxer = 10000;
                 int topper = 100000;
                 double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
@@ -46,4 +50,26 @@ public class FlyingSword extends ItemBase {
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
+
+    public class PlayerFly implements Runnable {
+
+        String uuid;
+        World world;
+
+        public PlayerFly(EntityPlayer player) {
+            this.uuid = player.getUniqueID().toString();
+            this.world = player.getEntityWorld();
+        }
+
+        @Override
+        public void run() {
+            try {
+                EntityPlayer player = world.getPlayerEntityByUUID(UUID.fromString(uuid));
+                PlayerMethods.sendMsgToPlayer(player, "Hey");
+            } catch (Exception e) {
+                return;
+            }
+        }
+    }
+
 }
