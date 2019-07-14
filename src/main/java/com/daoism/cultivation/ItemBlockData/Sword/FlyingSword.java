@@ -30,7 +30,6 @@ public class FlyingSword extends ItemBase {
         if(!worldIn.isRemote) {
                 Vec3d lookVec = playerIn.getLookVec();
                 PlayerFly flying = new PlayerFly(playerIn);
-                flying.st
                 double maxer = 10000;
                 int topper = 100000;
                 double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
