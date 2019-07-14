@@ -27,13 +27,21 @@ public class FlyingSword extends ItemBase {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if(!worldIn.isRemote) {
                 Vec3d lookVec = playerIn.getLookVec();
-                double maxer = 4000;
-                int topper = 8000;
+                double maxer = 10000;
+                int topper = 100000;
                 double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
-                double y = (((lookVec.y + 0.5) * 0.6) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
+                double y = (((lookVec.y * 0.6)) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
                 double z = ((lookVec.z * 0.3) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
                 playerIn.fallDistance = 0;
-                playerIn.setVelocity(x, y, z);
+                if (y < -0.5) {
+                    y += ((-0.5 - y) / 2 );
+                }
+                System.out.println(x);
+                System.out.println(y);
+                System.out.println(z);
+                System.out.println("Lmao");
+                playerIn.setVelocity(x,y,z);
+                playerIn.velocityChanged = true;
 
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
