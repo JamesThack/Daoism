@@ -112,11 +112,10 @@ public class EventsClass {
                 } e.setAmount(total);
             }
         }
-
         if(e.getSource().getTrueSource() instanceof EntityPlayer) {
             EntityPlayer attacker = (EntityPlayer) e.getSource().getTrueSource();
             if(attacker.getHeldItemMainhand().getItem().equals(ItemInit.FLYING_SWORD)) {
-                e.setAmount((int) (PlayerMethods.getEntityCultivationLevel(attacker) / 1000 ) );
+                e.setAmount( (int)  (PlayerMethods.getEntityCultivationLevel(attacker) / 1000 ) );
             }
         }
     }
