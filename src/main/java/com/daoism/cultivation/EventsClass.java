@@ -10,12 +10,15 @@ import com.daoism.cultivation.Registration.ItemInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -23,12 +26,23 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.server.command.ForgeCommand;
+
+import java.util.ArrayList;
 
 /**
  * This class is the listener for all the events of the mod
  */
 public class EventsClass {
+
+    public static ArrayList<EntityPlayer> onlinePlayers;
+
+    public EventsClass() {
+        onlinePlayers = new ArrayList<>();
+    }
 
     /**
      * This method is important, it ensures that whenever a player logs out/dies/changes dimension the NBT data is
@@ -42,6 +56,7 @@ public class EventsClass {
             CultivationCapability oldCult = e.getOriginal().getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
             cult.setCultivate(oldCult.canCultivate());
             cult.setCultivationLevel(oldCult.getCultivationLevel());
+            cult.setFlying(oldCult.isFlying());
     }
 
     /**
@@ -52,6 +67,20 @@ public class EventsClass {
     public void onAttach(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof EntityPlayer) {
             event.addCapability(new ResourceLocation(Daoism.MODID, Daoism.NAME), new CultivationHandler());
+        }
+    }
+
+    @SubscribeEvent
+    public void onLogin(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent e) {
+        if (!e.player.getEntityWorld().isRemote) {
+            onlinePlayers.add(e.player);
+        }
+    }
+
+    @SubscribeEvent
+    public void onLogout(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent e) {
+        if (!e.player.getEntityWorld().isRemote && onlinePlayers.contains(e.player)) {
+            onlinePlayers.remove(e.player);
         }
     }
 
@@ -137,6 +166,43 @@ public class EventsClass {
             item.setStackDisplayName( ("Golden Core Level " + (int) e.getEntityLiving().getMaxHealth() * 2) );
             EntityItem drop = new EntityItem(e.getEntityLiving().getEntityWorld(), pos.getX(), pos.getY(), pos.getZ(), item);
             e.getEntityLiving().getEntityWorld().spawnEntity(drop);
+        }
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent e) {
+        for (EntityPlayer playerIn : onlinePlayers) {
+            World worldIn = playerIn.getEntityWorld();
+            if (!worldIn.isRemote && PlayerMethods.isPlayerFlying(playerIn)) {
+                if (!playerIn.isSneaking()) {
+                    playerIn.setNoGravity(true);
+                    playerIn.setVelocity(0,0,0);
+                    playerIn.velocityChanged = true;
+                } else {
+                    playerIn.setNoGravity(false);
+                    Vec3d lookVec = playerIn.getLookVec();
+                    if (PlayerMethods.getEntityCultivationLevel(playerIn) > 10000) {
+                        double maxer = 10000;
+                        int topper = 100000;
+                        double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
+                        double y = (((lookVec.y * 0.6)) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
+                        double z = ((lookVec.z * 0.3) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
+                        playerIn.fallDistance = 0;
+                        if (y < -0.5) {
+                            y += ((-0.5 - y) / 2);
+                        }
+                        System.out.println(x);
+                        System.out.println(y);
+                        System.out.println(z);
+                        System.out.println("Lmao");
+                        playerIn.setVelocity(x, y, z);
+                        playerIn.velocityChanged = true;
+                    }
+                }
+            } else if (!worldIn.isRemote && !PlayerMethods.isPlayerFlying(playerIn)) {
+                playerIn.setNoGravity(false);
+            }
+
         }
     }
 
