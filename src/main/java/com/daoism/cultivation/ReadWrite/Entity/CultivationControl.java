@@ -10,6 +10,7 @@ public class CultivationControl {
 
         private int cultivation; //The cultivation level
         private boolean canCultivate; //If the player can cultivate
+        private boolean isFly; //If the player is flying
 
         @Override
         public void addCultivation(int cult) {
@@ -33,6 +34,16 @@ public class CultivationControl {
         @Override
         public void setCultivationLevel(int cult) {
             this.cultivation = cult;
+        }
+
+        @Override
+        public void setFlying(boolean flying) {
+            this.isFly = flying;
+        }
+
+        @Override
+        public boolean isFlying() {
+            return this.isFly;
         }
     }
 

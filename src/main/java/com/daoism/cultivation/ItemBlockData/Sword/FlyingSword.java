@@ -30,54 +30,14 @@ public class FlyingSword extends ItemBase {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if(!worldIn.isRemote) {
-                Vec3d lookVec = playerIn.getLookVec();
-                PlayerFly flying = new PlayerFly(playerIn);
-                if(PlayerMethods.getEntityCultivationLevel(playerIn) > 10000) {
-                    double maxer = 10000;
-                    int topper = 100000;
-                    double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
-                    double y = (((lookVec.y * 0.6)) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
-                    double z = ((lookVec.z * 0.3) * (PlayerMethods.getEntityCultivationLevel(playerIn, topper) / maxer));
-                    playerIn.fallDistance = 0;
-                    if (y < -0.5) {
-                        y += ((-0.5 - y) / 2);
-                    }
-                    System.out.println(x);
-                    System.out.println(y);
-                    System.out.println(z);
-                    System.out.println("Lmao");
-                    playerIn.setVelocity(x, y, z);
-                    playerIn.velocityChanged = true;
+                if (PlayerMethods.isPlayerFlying(playerIn)) {
+                    PlayerMethods.setPlayerFlying(playerIn, false);
                 } else {
-                    EntityItem drop = new EntityItem(worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY() + 2, playerIn.getPosition().getZ(), playerIn.getHeldItem(handIn));
-                    drop.setPickupDelay(20);
-                    worldIn.spawnEntity(drop);
-                    playerIn.setHeldItem(handIn, new ItemStack(Items.AIR, 1));
+                    PlayerMethods.setPlayerFlying(playerIn, true);
                 }
-
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
-    public class PlayerFly implements Runnable {
-
-        String uuid;
-        World world;
-
-        public PlayerFly(EntityPlayer player) {
-            this.uuid = player.getUniqueID().toString();
-            this.world = player.getEntityWorld();
-        }
-
-        @Override
-        public void run() {
-            try {
-                EntityPlayer player = world.getPlayerEntityByUUID(UUID.fromString(uuid));
-                PlayerMethods.sendMsgToPlayer(player, "Hey");
-            } catch (Exception e) {
-                return;
-            }
-        }
-    }
 
 }

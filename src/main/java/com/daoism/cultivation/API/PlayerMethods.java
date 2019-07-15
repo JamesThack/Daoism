@@ -173,6 +173,14 @@ public class PlayerMethods {
         return null;
     }
 
+    public static void setPlayerFlying(EntityPlayer player, boolean flying) {
+        getCultivationInstance(player).setFlying(flying);
+    }
+
+    public static boolean isPlayerFlying(EntityPlayer player) {
+        return getCultivationInstance(player).isFlying();
+    }
+
     /**
      * This method detects if a block is passable (things such as snow and air)
      * @param block The block
