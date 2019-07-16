@@ -3,10 +3,12 @@ package com.daoism.cultivation;
 import com.daoism.cultivation.API.ItemMethods;
 import com.daoism.cultivation.API.PlayerMethods;
 import com.daoism.cultivation.EntityData.EntitySpirit;
+import com.daoism.cultivation.EntityData.Models.ModelWings;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationHandler;
 import com.daoism.cultivation.ReadWrite.item.CoreHandler;
 import com.daoism.cultivation.Registration.ItemInit;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -149,6 +152,24 @@ public class EventsClass {
         }
     }
 
+    public static ModelBase modelAngelWings = new ModelWings();
+
+    @SubscribeEvent
+    public void renderPlayerPre(RenderPlayerEvent.Pre e) {
+        EntityPlayer player = e.getEntityPlayer();
+            if (PlayerMethods.isPlayerFlying(player)) {
+                PlayerMethods.sendMsgToPlayer(player, "Ok");
+                modelAngelWings.render(player, 0, 0, 0, player.renderYawOffset, player.rotationPitch, 0.0625F);
+            } else {
+                System.out.println(PlayerMethods.getEntityCultivationLevel(player));
+
+                CultivationCapability cap = player.getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
+                System.out.println(cap.getCultivationLevel());
+                PlayerMethods.sendMsgToPlayer(player, "Not Ok");
+            }
+
+    }
+
     /**
      * Whenever an entity dies this code is run
      * @param e The event data
@@ -178,6 +199,7 @@ public class EventsClass {
                     playerIn.setNoGravity(true);
                     playerIn.setVelocity(0,0,0);
                     playerIn.velocityChanged = true;
+                    playerIn.fallDistance = 0;
                 } else {
                     playerIn.setNoGravity(false);
                     Vec3d lookVec = playerIn.getLookVec();
@@ -191,10 +213,6 @@ public class EventsClass {
                         if (y < -0.5) {
                             y += ((-0.5 - y) / 2);
                         }
-                        System.out.println(x);
-                        System.out.println(y);
-                        System.out.println(z);
-                        System.out.println("Lmao");
                         playerIn.setVelocity(x, y, z);
                         playerIn.velocityChanged = true;
                     }

@@ -1,6 +1,8 @@
 package com.daoism.cultivation.ItemBlockData.Sword;
 
 import com.daoism.cultivation.API.PlayerMethods;
+import com.daoism.cultivation.Daoism;
+import com.daoism.cultivation.ReadWrite.item.CoreStorage;
 import com.daoism.cultivation.Registration.ItemBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -32,6 +34,7 @@ public class FlyingSword extends ItemBase {
         if(!worldIn.isRemote) {
                 if (PlayerMethods.isPlayerFlying(playerIn)) {
                     PlayerMethods.setPlayerFlying(playerIn, false);
+//                    Daoism.dispatcher.sendToAll(new Storage());
                 } else {
                     PlayerMethods.setPlayerFlying(playerIn, true);
                 }
