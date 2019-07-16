@@ -42,7 +42,7 @@ public class Daoism {
     /**
      * This code handles the logic of the client and server side relations, for example the sharing of NBTTags
      */
-    @SidedProxy(clientSide = "com.daoism.cultivation.Registration.ClientProxy", serverSide = "com.daoism.cultivation.Registration.CommonProxy")
+    @SidedProxy(clientSide = "com.daoism.cultivation.Registration.ClientProxy", serverSide = "com.daoism.cultivation.Registration.ServerProxy")
     public static CommonProxy proxy;
 
     /**
@@ -61,8 +61,6 @@ public class Daoism {
      */
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        CapabilityManager.INSTANCE.register(CultivationCapability.class, new Storage(), CultivationControl.CultivationHandler::new);
-        CapabilityManager.INSTANCE.register(CoreCapability.class, new CoreStorage(), CoreControl::new);
         proxy.init(event);
     }
 

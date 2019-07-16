@@ -19,7 +19,7 @@ public class RenderHandler {
         RenderingRegistry.registerEntityRenderingHandler(EntitySpirit.class, new IRenderFactory<EntitySpirit>() {
             @Override
             public Render<? super EntitySpirit> createRenderFor(RenderManager manager) {
-                //return new RenderSpirit(manager);
+//                return new RenderSpirit(manager);
                 return null;
             }
         });
