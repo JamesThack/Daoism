@@ -24,6 +24,8 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
     }
     public void init(FMLInitializationEvent event) {
+        CapabilityManager.INSTANCE.register(CultivationCapability.class, new Storage(), CultivationControl.CultivationHandler::new);
+        CapabilityManager.INSTANCE.register(CoreCapability.class, new CoreStorage(), CoreControl::new);
 
     }
 
