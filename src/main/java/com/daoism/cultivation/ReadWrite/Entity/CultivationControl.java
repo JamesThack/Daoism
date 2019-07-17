@@ -11,6 +11,7 @@ public class CultivationControl {
         private int cultivation; //The cultivation level
         private boolean canCultivate; //If the player can cultivate
         private boolean isFly; //If the player is flying
+        private String UUID; //The user ID
 
         @Override
         public void addCultivation(int cult) {
@@ -45,6 +46,18 @@ public class CultivationControl {
         public boolean isFlying() {
             return this.isFly;
         }
+
+        @Override
+        public String getName() {
+            return this.UUID;
+        }
+
+        @Override
+        public void setName(String name) {
+            this.UUID = name;
+        }
+
+
     }
 
 }

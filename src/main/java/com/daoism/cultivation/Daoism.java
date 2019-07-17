@@ -1,5 +1,6 @@
 package com.daoism.cultivation;
 
+import com.daoism.cultivation.API.NetworkHandler;
 import com.daoism.cultivation.Commands.DaoismCommand;
 //import com.daoism.cultivation.API.RenderHandler;
 import com.daoism.cultivation.EntityData.CommonProxy;
@@ -38,6 +39,7 @@ public class Daoism {
     static final String NAME = "Daoism"; //The mod name
     static final String VERSION = "1.0"; //The mod version
     public static SimpleNetworkWrapper dispatcher;
+    public static NetworkHandler handle;
 
     /**
      * This code handles the logic of the client and server side relations, for example the sharing of NBTTags
@@ -61,6 +63,7 @@ public class Daoism {
      */
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        handle = new NetworkHandler();
         proxy.init(event);
     }
 

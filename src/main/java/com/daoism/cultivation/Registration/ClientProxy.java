@@ -32,6 +32,8 @@ public class ClientProxy extends CommonProxy {
     }
     @Override
     public void init(FMLInitializationEvent event) {
+        CapabilityManager.INSTANCE.register(CultivationCapability.class, new Storage(), CultivationControl.CultivationHandler::new);
+        CapabilityManager.INSTANCE.register(CoreCapability.class, new CoreStorage(), CoreControl::new);
         MinecraftForge.EVENT_BUS.register(new ItemBase.ItemEventsHandler());
         MinecraftForge.EVENT_BUS.register(new EventsClass());
         MinecraftForge.EVENT_BUS.register(new BlockBase.BreakHandler());

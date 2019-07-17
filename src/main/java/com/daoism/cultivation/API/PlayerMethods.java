@@ -1,5 +1,6 @@
 package com.daoism.cultivation.API;
 
+import com.daoism.cultivation.Daoism;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationHandler;
 import net.minecraft.block.Block;
@@ -74,6 +75,7 @@ public class PlayerMethods {
      * @param cultivation True/False if the player should be cultivator
      */
     public static void setPlayerCultivator(EntityPlayer player, boolean cultivation) {
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
         getCultivationInstance(player).setCultivate(cultivation);
     }
 
@@ -95,11 +97,16 @@ public class PlayerMethods {
      * @return An int of the cultivation level
      */
     public static int getEntityCultivationLevel(EntityPlayer player, int max) {
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
         int val = getCultivationInstance(player).getCultivationLevel();
         if (val >= max) {
             return max;
         }
         return  val;
+    }
+
+    public static void setEntityUUID(EntityPlayer player) {
+        getCultivationInstance(player).setName(player.getUniqueID().toString());
     }
 
     /**

@@ -46,4 +46,8 @@ public interface CultivationCapability {
      */
     boolean isFlying();
 
+    String getName();
+
+    void setName(String name);
+
 }

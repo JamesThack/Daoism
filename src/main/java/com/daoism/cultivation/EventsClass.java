@@ -60,6 +60,7 @@ public class EventsClass {
             cult.setCultivate(oldCult.canCultivate());
             cult.setCultivationLevel(oldCult.getCultivationLevel());
             cult.setFlying(oldCult.isFlying());
+            cult.setName(oldCult.getName());
     }
 
     /**
@@ -76,6 +77,9 @@ public class EventsClass {
     @SubscribeEvent
     public void onLogin(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent e) {
         if (!e.player.getEntityWorld().isRemote) {
+            PlayerMethods.setEntityUUID(e.player);
+            Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(e.player));
+            System.out.println(PlayerMethods.getEntityCultivationLevel(e.player));
             onlinePlayers.add(e.player);
         }
     }
@@ -162,7 +166,7 @@ public class EventsClass {
                 modelAngelWings.render(player, 0, 0, 0, player.renderYawOffset, player.rotationPitch, 0.0625F);
             } else {
                 System.out.println(PlayerMethods.getEntityCultivationLevel(player));
-
+                System.out.println(Daoism.handle.getFromNetwork(player).getName());
                 CultivationCapability cap = player.getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
                 System.out.println(cap.getCultivationLevel());
                 PlayerMethods.sendMsgToPlayer(player, "Not Ok");
