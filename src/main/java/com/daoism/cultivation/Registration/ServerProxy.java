@@ -10,6 +10,9 @@ import com.daoism.cultivation.ReadWrite.item.CoreStorage;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
+/**
+ * Class to handle all server side data
+ */
 public class ServerProxy extends CommonProxy {
 
     @Override
@@ -17,4 +20,5 @@ public class ServerProxy extends CommonProxy {
         CapabilityManager.INSTANCE.register(CultivationCapability.class, new Storage(), CultivationControl.CultivationHandler::new);
         CapabilityManager.INSTANCE.register(CoreCapability.class, new CoreStorage(), CoreControl::new);
     }
+
 }

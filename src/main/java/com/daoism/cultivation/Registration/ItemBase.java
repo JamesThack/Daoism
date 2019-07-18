@@ -27,7 +27,6 @@ public class ItemBase extends Item {
      * Inner class to deal with clicking. Seperated from main events class for simplicity
      */
     public static class ItemEventsHandler {
-
         /**
          * Event that runs whenever player clicks
          * @param e The event data

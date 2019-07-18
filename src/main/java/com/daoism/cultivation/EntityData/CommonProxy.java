@@ -21,14 +21,27 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import java.util.Objects;
 
 public class CommonProxy {
+
+    /**
+     * All of the code to run pre initialisation
+     * @param event The event data
+     */
     public void preInit(FMLPreInitializationEvent event) {
     }
+
+    /**
+     * All of the code to happen during initialisation of the game
+     * @param event The event data
+     */
     public void init(FMLInitializationEvent event) {
         CapabilityManager.INSTANCE.register(CultivationCapability.class, new Storage(), CultivationControl.CultivationHandler::new);
         CapabilityManager.INSTANCE.register(CoreCapability.class, new CoreStorage(), CoreControl::new);
-
     }
 
+    /**
+     * All of the code to run after initialisation
+     * @param event The event data
+     */
     public void postInit(FMLPostInitializationEvent event) {
     }
 
