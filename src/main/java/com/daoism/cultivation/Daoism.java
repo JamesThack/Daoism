@@ -1,10 +1,18 @@
 package com.daoism.cultivation;
 
+import com.daoism.cultivation.API.NetworkHandler;
 import com.daoism.cultivation.Commands.DaoismCommand;
 //import com.daoism.cultivation.API.RenderHandler;
 import com.daoism.cultivation.EntityData.CommonProxy;
 import com.daoism.cultivation.EntityData.EntityInit;
+import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
+import com.daoism.cultivation.ReadWrite.Entity.CultivationControl;
+import com.daoism.cultivation.ReadWrite.Entity.Storage;
+import com.daoism.cultivation.ReadWrite.item.CoreCapability;
+import com.daoism.cultivation.ReadWrite.item.CoreControl;
+import com.daoism.cultivation.ReadWrite.item.CoreStorage;
 import com.daoism.cultivation.Registration.ClientProxy;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -13,7 +21,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.handshake.FMLHandshakeMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 @Mod(modid = Daoism.MODID, name = Daoism.NAME, version = Daoism.VERSION)
 
@@ -28,11 +38,13 @@ public class Daoism {
     static final String MODID = "daoism"; //The mod ID
     static final String NAME = "Daoism"; //The mod name
     static final String VERSION = "1.0"; //The mod version
+    public static SimpleNetworkWrapper dispatcher;
+    public static NetworkHandler handle;
 
     /**
      * This code handles the logic of the client and server side relations, for example the sharing of NBTTags
      */
-    @SidedProxy(clientSide = "com.daoism.cultivation.Registration.ClientProxy", serverSide = "com.daoism.cultivation.Registration.CommonProxy")
+    @SidedProxy(clientSide = "com.daoism.cultivation.Registration.ClientProxy", serverSide = "com.daoism.cultivation.Registration.ServerProxy")
     public static CommonProxy proxy;
 
     /**
@@ -41,6 +53,7 @@ public class Daoism {
      */
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        dispatcher = NetworkRegistry.INSTANCE.newSimpleChannel("daoism");
         proxy.preInit(event);
     }
 
@@ -50,6 +63,7 @@ public class Daoism {
      */
     @EventHandler
     public void init(FMLInitializationEvent event) {
+        handle = new NetworkHandler();
         proxy.init(event);
     }
 

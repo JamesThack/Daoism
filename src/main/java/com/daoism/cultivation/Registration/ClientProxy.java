@@ -28,7 +28,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         EntityInit.registerEntities();
-        //RenderHandler.registerEntityRenders();
+        RenderHandler.registerEntityRenders();
     }
     @Override
     public void init(FMLInitializationEvent event) {

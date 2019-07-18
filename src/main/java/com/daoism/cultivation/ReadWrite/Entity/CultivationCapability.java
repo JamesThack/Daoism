@@ -34,4 +34,20 @@ public interface CultivationCapability {
      */
     void setCultivationLevel(int cult);
 
+    /**
+     * Set if the player is currently flying with a sword
+     * @param flying Boolean (should the player fly)
+     */
+    void setFlying(boolean flying);
+
+    /**
+     * Returns if the player is flying
+     * @return Boolean if the player is flying
+     */
+    boolean isFlying();
+
+    String getName();
+
+    void setName(String name);
+
 }
