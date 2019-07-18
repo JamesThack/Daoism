@@ -1,5 +1,6 @@
 package com.daoism.cultivation.API;
 
+import com.daoism.cultivation.Daoism;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationHandler;
 import net.minecraft.block.Block;
@@ -75,6 +76,7 @@ public class PlayerMethods {
      */
     public static void setPlayerCultivator(EntityPlayer player, boolean cultivation) {
         getCultivationInstance(player).setCultivate(cultivation);
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
     }
 
     /**
@@ -95,11 +97,16 @@ public class PlayerMethods {
      * @return An int of the cultivation level
      */
     public static int getEntityCultivationLevel(EntityPlayer player, int max) {
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
         int val = getCultivationInstance(player).getCultivationLevel();
         if (val >= max) {
             return max;
         }
         return  val;
+    }
+
+    public static void setEntityUUID(EntityPlayer player) {
+        getCultivationInstance(player).setName(player.getUniqueID().toString());
     }
 
     /**
@@ -131,6 +138,7 @@ public class PlayerMethods {
      */
     public static void addEntityCultivation(int cult, EntityPlayer player) {
         PlayerMethods.getCultivationInstance(player).addCultivation(cult);
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
     }
 
     /**
@@ -171,6 +179,15 @@ public class PlayerMethods {
             }
         }
         return null;
+    }
+
+    public static void setPlayerFlying(EntityPlayer player, boolean flying) {
+        getCultivationInstance(player).setFlying(flying);
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
+    }
+
+    public static boolean isPlayerFlying(EntityPlayer player) {
+        return getCultivationInstance(player).isFlying();
     }
 
     /**

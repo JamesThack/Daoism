@@ -4,6 +4,7 @@ import com.daoism.cultivation.ItemBlockData.Abilities.Attraction;
 import com.daoism.cultivation.ItemBlockData.Abilities.Blink;
 import com.daoism.cultivation.ItemBlockData.Food.GoldenCore;
 import com.daoism.cultivation.ItemBlockData.Misc.SpiritualIdentifier;
+import com.daoism.cultivation.ItemBlockData.Sword.FlyingSword;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -26,5 +27,6 @@ public class ItemInit {
     public static final Item CULTIVATION_IDENTIFIER = new SpiritualIdentifier("misc_magnifying_glass").setCreativeTab(CreativeTabs.MISC);
     public static final Item BLINK_ABILITY = new Blink("misc_blink_ability").setCreativeTab(CreativeTabs.COMBAT);
     public static final Item ATTRACTION_ABILITY = new Attraction("misc_attraction_ability").setCreativeTab(CreativeTabs.COMBAT);
+    public static final Item FLYING_SWORD = new FlyingSword("weapon_flying_sword").setCreativeTab(CreativeTabs.COMBAT);
 
 }
