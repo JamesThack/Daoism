@@ -79,6 +79,10 @@ public class EventsClass {
         }
     }
 
+    /**
+     * Whenever the player logs in this event is run.
+     * @param e The event data
+     */
     @SubscribeEvent
     public void onLogin(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent e) {
         if (!e.player.getEntityWorld().isRemote) {
@@ -161,8 +165,10 @@ public class EventsClass {
         }
     }
 
-    public static ModelBase modelAngelWings = new ModelWings();
-
+    /**
+     * This event controls what is rendered on the player
+     * @param e The event data
+     */
     @SubscribeEvent
     public void renderPlayerPre(RenderPlayerEvent.Pre e) {
         EntityPlayer player = e.getEntityPlayer();
@@ -192,6 +198,10 @@ public class EventsClass {
         }
     }
 
+    /**
+     * This event runs every tick
+     * @param e The event data
+     */
     @SubscribeEvent
     public void onTick(TickEvent e) {
         for (EntityPlayer playerIn : onlinePlayers) {
@@ -224,7 +234,6 @@ public class EventsClass {
             } else if (!worldIn.isRemote && !PlayerMethods.isPlayerFlying(playerIn)) {
                 playerIn.setNoGravity(false);
             }
-
         }
     }
 

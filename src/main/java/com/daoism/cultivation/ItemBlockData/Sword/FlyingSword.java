@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 import java.util.UUID;
 
 public class FlyingSword extends ItemBase {
+
     /**
      * Constructor, sets the unlocalised name and registers it
-     *
      * @param name Unlocalised name
      */
     public FlyingSword(String name) {
@@ -29,18 +29,24 @@ public class FlyingSword extends ItemBase {
         this.setMaxStackSize(1);
     }
 
+    /**
+     * This code runs when the sword is right clicked, enables the capability data to register the player as flying
+     * (all of the other flying code is located in events)
+     * @param worldIn The world
+     * @param playerIn The player
+     * @param handIn The hand
+     * @return If the action was successful
+     */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         if(!worldIn.isRemote) {
                 if (PlayerMethods.isPlayerFlying(playerIn)) {
                     PlayerMethods.setPlayerFlying(playerIn, false);
-//                    Daoism.dispatcher.sendToAll(new Storage());
                 } else {
                     PlayerMethods.setPlayerFlying(playerIn, true);
                 }
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
-
 
 }
