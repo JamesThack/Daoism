@@ -8,7 +8,11 @@ import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationHandler;
 import com.daoism.cultivation.ReadWrite.item.CoreHandler;
 import com.daoism.cultivation.Registration.ItemInit;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -161,15 +166,8 @@ public class EventsClass {
     @SubscribeEvent
     public void renderPlayerPre(RenderPlayerEvent.Pre e) {
         EntityPlayer player = e.getEntityPlayer();
-            if (PlayerMethods.isPlayerFlying(player)) {
-                PlayerMethods.sendMsgToPlayer(player, "Ok");
-                modelAngelWings.render(player, 0, 0, 0, player.renderYawOffset, player.rotationPitch, 0.0625F);
-            } else {
-                System.out.println(PlayerMethods.getEntityCultivationLevel(player));
-                System.out.println(Daoism.handle.getFromNetwork(player).getName());
-                CultivationCapability cap = player.getCapability(CultivationHandler.CULTIVATION_CAPABILITY, null);
-                System.out.println(cap.getCultivationLevel());
-                PlayerMethods.sendMsgToPlayer(player, "Not Ok");
+            if (Daoism.handle.getFromNetwork(e.getEntityPlayer()) != null && Daoism.handle.getFromNetwork(e.getEntityPlayer()).isFlying()) {
+
             }
 
     }
@@ -199,6 +197,8 @@ public class EventsClass {
         for (EntityPlayer playerIn : onlinePlayers) {
             World worldIn = playerIn.getEntityWorld();
             if (!worldIn.isRemote && PlayerMethods.isPlayerFlying(playerIn)) {
+                PlayerMethods.setEntityUUID(playerIn);
+                Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(playerIn));
                 if (!playerIn.isSneaking()) {
                     playerIn.setNoGravity(true);
                     playerIn.setVelocity(0,0,0);

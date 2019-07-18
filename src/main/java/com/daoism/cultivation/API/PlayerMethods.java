@@ -75,8 +75,8 @@ public class PlayerMethods {
      * @param cultivation True/False if the player should be cultivator
      */
     public static void setPlayerCultivator(EntityPlayer player, boolean cultivation) {
-        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
         getCultivationInstance(player).setCultivate(cultivation);
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
     }
 
     /**
@@ -138,6 +138,7 @@ public class PlayerMethods {
      */
     public static void addEntityCultivation(int cult, EntityPlayer player) {
         PlayerMethods.getCultivationInstance(player).addCultivation(cult);
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
     }
 
     /**
@@ -182,6 +183,7 @@ public class PlayerMethods {
 
     public static void setPlayerFlying(EntityPlayer player, boolean flying) {
         getCultivationInstance(player).setFlying(flying);
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
     }
 
     public static boolean isPlayerFlying(EntityPlayer player) {

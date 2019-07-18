@@ -15,19 +15,25 @@ public class NetworkHandler {
     }
 
     public void sendToNetwork(CultivationCapability con) {
+        boolean found = false;
         for (int i = 0; i < playerData.size(); i++) {
             CultivationCapability current = playerData.get(i);
             if (current.getName() != null && con.getName() !=null &&  current.getName().equals(con.getName())) {
-                playerData.remove(i);
-                i -=1;
+                found = true;
+                current.setCultivate(con.canCultivate());
+                current.setCultivationLevel(con.getCultivationLevel());
+                current.setFlying(con.isFlying());
+                current.setName(con.getName());
             }
 
-        } playerData.add(con);
+        } if (!found) {
+            playerData.add(con);
+        }
     }
 
     public CultivationCapability getFromNetwork(EntityPlayer player) {
         for (CultivationCapability current: playerData) {
-            if (current.getName().equals(player.getUniqueID().toString())) {
+            if (current.getName() !=null && current.getName().equals(player.getUniqueID().toString())) {
                 return current;
             }
         } return null;
