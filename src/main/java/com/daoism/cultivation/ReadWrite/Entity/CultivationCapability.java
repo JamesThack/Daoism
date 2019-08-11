@@ -46,8 +46,16 @@ public interface CultivationCapability {
      */
     boolean isFlying();
 
+    /**
+     * Returns the UUID of the player
+     * @return The UUID
+     */
     String getName();
 
+    /**
+     * Sets the UUID of the player
+     * @param name The UUID
+     */
     void setName(String name);
 
 }

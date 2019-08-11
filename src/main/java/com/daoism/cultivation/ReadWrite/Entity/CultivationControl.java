@@ -12,6 +12,7 @@ public class CultivationControl {
         private boolean canCultivate; //If the player can cultivate
         private boolean isFly; //If the player is flying
         private String UUID; //The user ID
+        private boolean frozen; //Is the entity frozen
 
         @Override
         public void addCultivation(int cult) {

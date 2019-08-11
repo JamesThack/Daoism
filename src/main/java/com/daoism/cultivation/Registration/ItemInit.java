@@ -6,6 +6,7 @@ import com.daoism.cultivation.ItemBlockData.Food.GoldenCore;
 import com.daoism.cultivation.ItemBlockData.Misc.SpiritualIdentifier;
 import com.daoism.cultivation.ItemBlockData.Sword.FlameTalisman;
 import com.daoism.cultivation.ItemBlockData.Sword.FlyingSword;
+import com.daoism.cultivation.ItemBlockData.Sword.ParalysisTalisman;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -30,5 +31,6 @@ public class ItemInit {
     public static final Item ATTRACTION_ABILITY = new Attraction("misc_attraction_ability").setCreativeTab(CreativeTabs.COMBAT);
     public static final Item FLYING_SWORD = new FlyingSword("weapon_flying_sword").setCreativeTab(CreativeTabs.COMBAT);
     public static final Item FLAME_TALISMAN = new FlameTalisman("weapon_flame_talisman").setCreativeTab(CreativeTabs.COMBAT);
+    public static final Item PARALYSIS_TALISMAN = new ParalysisTalisman("weapon_paralysis_talisman").setCreativeTab(CreativeTabs.COMBAT);
 
 }
