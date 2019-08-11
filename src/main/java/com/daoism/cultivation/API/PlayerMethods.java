@@ -182,11 +182,21 @@ public class PlayerMethods {
         return null;
     }
 
+    /**
+     * Sets if the player is currently flying
+     * @param player The player
+     * @param flying If they are flying
+     */
     public static void setPlayerFlying(EntityPlayer player, boolean flying) {
         getCultivationInstance(player).setFlying(flying);
         Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
     }
 
+    /**
+     * Returns if the player is flying on a flying sword
+     * @param player The player
+     * @return Boolean if they are flying
+     */
     public static boolean isPlayerFlying(EntityPlayer player) {
         return getCultivationInstance(player).isFlying();
     }
