@@ -41,10 +41,15 @@ public class QiShield extends ItemBase {
                     maxer = ((EntityLiving) entity).getMaxHealth() * 200;
                     topper = (int) maxer * 2;
                 }
-                System.out.println(entity.getPosition().getX() - player.getPosition().getX());
-                double x = ((((entity.getPosition().getX() - player.getPosition().getX()) * 0.20) * 0.3) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
-                double y = (((entity.getPosition().getY() - player.getPosition().getY()) *0.1)  * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
-                double z = (((((entity.getPosition().getZ() - player.getPosition().getZ()))  * 0.20) * 0.3) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
+                double y = 0;
+                if (entity.getPosition().getY() - player.getPosition().getY() > -1) {
+                    y = 2;
+                } else {
+                    y = -1;
+                }
+                double x = ((entity.getPosition().getX() - player.getPosition().getX())  * 0.1) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer);
+                y = (y * 0.1)  * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer);
+                double z = ((entity.getPosition().getZ() - player.getPosition().getZ())  * 0.1) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer);
                 entity.fallDistance = 0;
                 if (player.isSneaking()) {
                     entity.setVelocity(-x, (-y * 2), -z);
