@@ -41,7 +41,7 @@ public class QiShield extends ItemBase {
                     maxer = ((EntityLiving) entity).getMaxHealth() * 200;
                     topper = (int) maxer * 2;
                 }
-                double y = 0;
+                double y;
                 if (entity.getPosition().getY() - player.getPosition().getY() > -1) {
                     y = 2;
                 } else {

@@ -1,9 +1,10 @@
 item.food_aquapill.name=Aqua Pill
+item.weapon_flying_sword.name=Flying Sword
 item.weapon_flame_talisman.name=Flame Talisman
 item.weapon_paralysis_talisman.name=Paralysis Talisman
 item.misc_magnifying_glass.name=Spiritual Identifier
 item.misc_blink_ability.name=Medium Tome: Blink
 item.misc_attraction_ability.name=Medium Tome: Attraction
-item.misc_qishield_ability.name=Qi Shield
+item.misc_qishield_ability.name=Medium Tome: Qi Shield
 
 command.daoism.usage=/daoism help
