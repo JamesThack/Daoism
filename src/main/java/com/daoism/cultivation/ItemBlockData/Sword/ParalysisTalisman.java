@@ -28,6 +28,13 @@ public class ParalysisTalisman extends ItemBase {
         this.setMaxStackSize(1);
     }
 
+    /**
+     * Runs when an entity is punched with item
+     * @param stack The item used
+     * @param player The player punching
+     * @param entity The entity punched
+     * @return A boolean weather or not to cancel punching damage
+     */
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
         if (!player.getEntityWorld().isRemote) {

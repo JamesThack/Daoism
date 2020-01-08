@@ -28,6 +28,13 @@ public class FlameTalisman extends ItemBase {
         this.setMaxStackSize(1);
     }
 
+    /**
+     * Runs when an entity is punched
+     * @param stack The item used
+     * @param player The player
+     * @param entity The entity punched
+     * @return Boolean weather or not to cancel the damage
+     */
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
         if (!player.getEntityWorld().isRemote) {
@@ -40,17 +47,9 @@ public class FlameTalisman extends ItemBase {
                     PlayerMethods.sendMsgToPlayer(player, "You do not have enough cultivation to harm this entity", new Style().setColor(TextFormatting.GOLD));
                 }
             }
-
         } return true;
     }
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack item = playerIn.getHeldItem(handIn);
-        if (!worldIn.isRemote) {
-
-        } return new ActionResult<>(EnumActionResult.SUCCESS, item);
-    }
 }
 
 
