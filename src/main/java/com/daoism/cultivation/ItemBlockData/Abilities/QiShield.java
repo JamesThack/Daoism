@@ -6,11 +6,13 @@ import com.daoism.cultivation.API.PlayerMethods;
 import com.daoism.cultivation.Registration.ItemBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -30,14 +32,25 @@ public class QiShield extends ItemBase {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack curItem = player.getHeldItem(handIn);
         if (!worldIn.isRemote) {
-            Block block = PlayerMethods.blockPlayerIsLookingAt(player, 3000);
-            if (block !=null) {
-
-            }
             Cube cube = CalebMathHelper.generateNewCube(5, player);
             List<Entity> entitiesInArea = cube.getEntitiesInCube(player);
-            for (Entity current: entitiesInArea) {
-                System.out.println(current.getName());
+            for (Entity entity: entitiesInArea) {
+                double maxer = 4000;
+                int topper = 8000;
+                if (entity instanceof EntityLiving) {
+                    maxer = ((EntityLiving) entity).getMaxHealth() * 200;
+                    topper = (int) maxer * 2;
+                }
+                System.out.println(entity.getPosition().getX() - player.getPosition().getX());
+                double x = ((((entity.getPosition().getX() - player.getPosition().getX()) * 0.20) * 0.3) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
+                double y = (((entity.getPosition().getY() - player.getPosition().getY()) *0.1)  * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
+                double z = (((((entity.getPosition().getZ() - player.getPosition().getZ()))  * 0.20) * 0.3) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
+                entity.fallDistance = 0;
+                if (player.isSneaking()) {
+                    entity.setVelocity(-x, (-y * 2), -z);
+                } else {
+                    entity.setVelocity(x, y, z);
+                }
             }
 
         }
