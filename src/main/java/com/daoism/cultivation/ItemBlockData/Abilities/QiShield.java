@@ -1,14 +1,19 @@
 package com.daoism.cultivation.ItemBlockData.Abilities;
 
+import com.daoism.cultivation.API.CalebMathHelper;
+import com.daoism.cultivation.API.MathObjects.Cube;
 import com.daoism.cultivation.API.PlayerMethods;
 import com.daoism.cultivation.Registration.ItemBase;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class QiShield extends ItemBase {
     /**
@@ -26,10 +31,15 @@ public class QiShield extends ItemBase {
         ItemStack curItem = player.getHeldItem(handIn);
         if (!worldIn.isRemote) {
             Block block = PlayerMethods.blockPlayerIsLookingAt(player, 3000);
-            System.out.println("Got here");
             if (block !=null) {
-                System.out.println(block.getLocalizedName());
+
             }
+            Cube cube = CalebMathHelper.generateNewCube(5, player);
+            List<Entity> entitiesInArea = cube.getEntitiesInCube(player);
+            for (Entity current: entitiesInArea) {
+                System.out.println(current.getName());
+            }
+
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, curItem);
     }
