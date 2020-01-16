@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class QiShield extends ItemBase {
+
     /**
      * Constructor, sets the unlocalised name and registers it
      *
@@ -28,6 +29,13 @@ public class QiShield extends ItemBase {
         this.setMaxStackSize(1);
     }
 
+    /**
+     * Code to run when the player right clicks with the item, this tome knocks back all of the entities within a specific radius
+     * @param worldIn ZA WARUDO!
+     * @param player The player using the item
+     * @param handIn The hand being used
+     * @return If the action was completed successfully
+     */
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack curItem = player.getHeldItem(handIn);
@@ -61,4 +69,5 @@ public class QiShield extends ItemBase {
         }
         return new ActionResult<>(EnumActionResult.SUCCESS, curItem);
     }
+
 }
