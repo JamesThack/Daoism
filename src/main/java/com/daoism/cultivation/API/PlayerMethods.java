@@ -14,6 +14,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
@@ -153,6 +154,25 @@ public class PlayerMethods {
     }
 
     /**
+     * This method returns the block the player is looking at
+     * @param player The Player
+     * @param maxDistance The maximum distance away the block can be
+     * @return The block
+     */
+    public static Block blockPlayerIsLookingAt(EntityPlayer player, int maxDistance) {
+        for (int i = 1; i < maxDistance; i++) {
+            RayTraceResult mop = player.rayTrace(i, 1.0F);
+            try {
+                if (!isBlockPassable(player.getEntityWorld().getBlockState(mop.getBlockPos()).getBlock())) {
+                    return player.getEntityWorld().getBlockState(mop.getBlockPos()).getBlock();
+                }
+            } catch (Exception e) {
+                return null;
+            }
+        }return null;
+    }
+
+    /**
      * This method returns any entity that the player is looking directly at
      * @param player The player
      * @param maxDistance The maximum distance you want to search for
@@ -213,7 +233,6 @@ public class PlayerMethods {
         thruBlocks.add(Blocks.VINE);
         thruBlocks.add(Blocks.TRIPWIRE);
         thruBlocks.add(Blocks.CARPET);
-        thruBlocks.add(Blocks.GRASS);
         thruBlocks.add(Blocks.TALLGRASS);
         thruBlocks.add(Blocks.WATER);
         thruBlocks.add(Blocks.FLOWING_WATER);

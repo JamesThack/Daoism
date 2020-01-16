@@ -130,7 +130,6 @@ public class EventsClass {
                     total -=1;
                     System.out.println(total);
                     if (total < 0) {
-                        System.out.println("LOL");
                         e.setCanceled(true);
                         break;
                     }
@@ -151,9 +150,7 @@ public class EventsClass {
                 float total = e.getAmount();
                 for (int i = 0; i < PlayerMethods.getEntityCultivationLevel(player); i+= 1000) {
                     total -=1;
-                    System.out.println(total);
                     if (total < 0) {
-                        System.out.println("LOL");
                         e.setCanceled(true);
                         total = 0;
                         break;

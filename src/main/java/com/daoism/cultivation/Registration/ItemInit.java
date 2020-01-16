@@ -2,6 +2,7 @@ package com.daoism.cultivation.Registration;
 
 import com.daoism.cultivation.ItemBlockData.Abilities.Attraction;
 import com.daoism.cultivation.ItemBlockData.Abilities.Blink;
+import com.daoism.cultivation.ItemBlockData.Abilities.QiShield;
 import com.daoism.cultivation.ItemBlockData.Food.GoldenCore;
 import com.daoism.cultivation.ItemBlockData.Misc.SpiritualIdentifier;
 import com.daoism.cultivation.ItemBlockData.Sword.FlameTalisman;
@@ -32,5 +33,6 @@ public class ItemInit {
     public static final Item FLYING_SWORD = new FlyingSword("weapon_flying_sword").setCreativeTab(CreativeTabs.COMBAT);
     public static final Item FLAME_TALISMAN = new FlameTalisman("weapon_flame_talisman").setCreativeTab(CreativeTabs.COMBAT);
     public static final Item PARALYSIS_TALISMAN = new ParalysisTalisman("weapon_paralysis_talisman").setCreativeTab(CreativeTabs.COMBAT);
+    public static final Item QISHIELD_ABILITY = new QiShield("misc_qishield_ability").setCreativeTab(CreativeTabs.COMBAT);
 
 }
