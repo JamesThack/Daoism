@@ -203,8 +203,8 @@ public class EventsClass {
      * @param e The event data
      */
     @SubscribeEvent
-    public void onTick(TickEvent e) {
-        for (EntityPlayer playerIn : onlinePlayers) {
+    public void onTick(TickEvent.PlayerTickEvent e) {
+            EntityPlayer playerIn = e.player;
             World worldIn = playerIn.getEntityWorld();
             if (!worldIn.isRemote && PlayerMethods.isPlayerFlying(playerIn)) {
                 PlayerMethods.setEntityUUID(playerIn);
@@ -235,6 +235,5 @@ public class EventsClass {
                 playerIn.setNoGravity(false);
             }
         }
-    }
 
 }
