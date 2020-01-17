@@ -50,12 +50,6 @@ import java.util.ArrayList;
  */
 public class EventsClass {
 
-    public static ArrayList<EntityPlayer> onlinePlayers;
-
-    public EventsClass() {
-        onlinePlayers = new ArrayList<>();
-    }
-
     /**
      * This method is important, it ensures that whenever a player logs out/dies/changes dimension the NBT data is
      * copied over and not lost
@@ -93,14 +87,6 @@ public class EventsClass {
             PlayerMethods.setEntityUUID(e.player);
             Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(e.player));
             System.out.println(PlayerMethods.getEntityCultivationLevel(e.player));
-            onlinePlayers.add(e.player);
-        }
-    }
-
-    @SubscribeEvent
-    public void onLogout(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent e) {
-        if (!e.player.getEntityWorld().isRemote && onlinePlayers.contains(e.player)) {
-            onlinePlayers.remove(e.player);
         }
     }
 
