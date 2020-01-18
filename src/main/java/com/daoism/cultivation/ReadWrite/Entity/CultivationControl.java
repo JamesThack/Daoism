@@ -62,22 +62,27 @@ public class CultivationControl {
 
         @Override
         public void setAccessCultivation(int accessCultivation) {
+            this.cultivationAccess = accessCultivation;
+        }
 
+        @Override
+        public void addAccessCultivation(int addition) {
+            this.cultivationAccess += addition;
         }
 
         @Override
         public void setCultivationOutput(int cultivationOutput) {
-
+            this.cultivationOutput = cultivationOutput;
         }
 
         @Override
         public int getAccessCultivation() {
-            return 0;
+            return this.cultivationAccess;
         }
 
         @Override
         public int getCultivationOutput() {
-            return 0;
+            return this.cultivationOutput;
         }
 
 

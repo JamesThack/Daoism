@@ -39,7 +39,7 @@ public class GoldenCore extends ItemFoodBase {
         if(!worldIn.isRemote) {
             int addLevel = ItemMethods.getLevel(stack);
             addLevel *= CalebMathHelper.randomFloatGenerator(0.3F,0.6F);
-            PlayerMethods.addEntityCultivation(addLevel, player);
+            PlayerMethods.addPlayerCultivationUsage(addLevel, player);
             PlayerMethods.sendMsgToPlayer(player, ("Your cultivation has increased by " + addLevel), new Style().setColor(TextFormatting.GOLD));
         }
     }

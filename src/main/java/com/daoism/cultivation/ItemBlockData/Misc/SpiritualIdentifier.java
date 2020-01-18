@@ -39,7 +39,9 @@ public class SpiritualIdentifier extends ItemBase {
         if(!worldIn.isRemote) {
             if(PlayerMethods.isPlayerCultivator(player)) {
                 if (player.isSneaking()) {
-                    PlayerMethods.sendMsgToPlayer(player, ("Your current cultivation level is " + PlayerMethods.getEntityCultivationLevel(player)), new Style().setColor(TextFormatting.GOLD));
+                    PlayerMethods.sendMsgToPlayer(player, ("Your current maximum cultivation level is " + PlayerMethods.getEntityCultivationLevel(player)), new Style().setColor(TextFormatting.GOLD));
+                    PlayerMethods.sendMsgToPlayer(player, ("Your current available cultivation level is " + PlayerMethods.getPlayerCultivationUsage(player)), new Style().setColor(TextFormatting.GOLD));
+                    PlayerMethods.sendMsgToPlayer(player, ("Your current cultivation output is " + PlayerMethods.getPlayerCultivationOutput(player)), new Style().setColor(TextFormatting.GOLD));
                 } else {
                     Entity entity = PlayerMethods.entityPlayerIsLookingAt(player);
                     if(entity != null) {

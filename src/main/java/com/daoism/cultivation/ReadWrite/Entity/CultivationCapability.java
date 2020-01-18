@@ -65,6 +65,8 @@ public interface CultivationCapability {
      */
     void setAccessCultivation(int accessCultivation);
 
+    void addAccessCultivation(int addition);
+
     /**
      * Sets the amount of spiritual power the player outputs
      * @param cultivationOutput The amount of spiritual power

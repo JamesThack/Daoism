@@ -145,12 +145,25 @@ public class PlayerMethods {
     }
 
     /**
-     *  Sets the amount of cultivation the player has access to
+     * adds to the amount of cultivation the player has access to
      * @param usage The cultivation to set
      * @param player The player
      */
-    public static void setPlayerCultivationUsage(int usage, EntityPlayer player) {
-        PlayerMethods.getCultivationInstance(player).setAccessCultivation(usage);
+    public static void addPlayerCultivationUsage(int usage, EntityPlayer player) {
+        int current = PlayerMethods.getEntityCultivationLevel(player);
+        int available = PlayerMethods.getPlayerCultivationUsage(player);
+        if (current < available + usage) {
+            PlayerMethods.addEntityCultivation(usage , player);
+            PlayerMethods.getCultivationInstance(player).setAccessCultivation(PlayerMethods.getEntityCultivationLevel(player));
+            Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
+        } else {
+            PlayerMethods.getCultivationInstance(player).addAccessCultivation(usage);
+            Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
+        }
+    }
+
+    public static void setPlayerCultivationUsage(int set, EntityPlayer player) {
+        PlayerMethods.getCultivationInstance(player).setAccessCultivation(set);
         Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
     }
 
@@ -166,19 +179,17 @@ public class PlayerMethods {
 
     /**
      * Returns the amount of cultivation the player has access to
-     * @param usage The cultivation to set
      * @param player The player
      */
-    public static int getPlayerCultivationUsage(int usage, EntityPlayer player) {
+    public static int getPlayerCultivationUsage(EntityPlayer player) {
         return PlayerMethods.getCultivationInstance(player).getAccessCultivation();
     }
 
     /**
      * Returns the amount of cultivation the player can output
-     * @param usage The amount of cultivation
      * @param player The player
      */
-    public static int getPlayerCultivationOutput(int usage, EntityPlayer player) {
+    public static int getPlayerCultivationOutput(EntityPlayer player) {
         return PlayerMethods.getCultivationInstance(player).getCultivationOutput();
     }
 

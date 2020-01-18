@@ -46,6 +46,7 @@ public class Attraction extends ItemBase {
                     topper = (int) maxer * 2;
                     System.out.println(topper);
                 }
+                PlayerMethods.setPlayerCultivationUsage(0, player);
                 double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
                 double y = (((lookVec.y + 0.5) * 0.6) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
                 double z = ((lookVec.z * 0.3) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
