@@ -17,6 +17,8 @@ public class Storage implements Capability.IStorage<CultivationCapability> {
         tag.setInteger("cultivationLevel", instance.getCultivationLevel());
         tag.setBoolean("isFlying", instance.isFlying());
         tag.setString("nameUUID", instance.getName());
+        tag.setInteger("cultivationAccess", instance.getAccessCultivation());
+        tag.setInteger("cultivationOutput", instance.getCultivationOutput());
         return tag;
     }
 
@@ -27,6 +29,8 @@ public class Storage implements Capability.IStorage<CultivationCapability> {
         instance.setCultivationLevel(tag.getInteger("cultivationLevel"));
         instance.setFlying(tag.getBoolean("isFlying"));
         instance.setName(tag.getString("nameUUID"));
+        instance.setAccessCultivation(tag.getInteger("cultivationAccess"));
+        instance.setCultivationOutput(tag.getInteger("cultivationOutput"));
     }
 
 }

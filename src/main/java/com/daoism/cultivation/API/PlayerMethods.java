@@ -3,6 +3,7 @@ package com.daoism.cultivation.API;
 import com.daoism.cultivation.Daoism;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationCapability;
 import com.daoism.cultivation.ReadWrite.Entity.CultivationHandler;
+import ibxm.Player;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -141,6 +142,44 @@ public class PlayerMethods {
     public static void addEntityCultivation(int cult, EntityPlayer player) {
         PlayerMethods.getCultivationInstance(player).addCultivation(cult);
         Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
+    }
+
+    /**
+     *  Sets the amount of cultivation the player has access to
+     * @param usage The cultivation to set
+     * @param player The player
+     */
+    public static void setPlayerCultivationUsage(int usage, EntityPlayer player) {
+        PlayerMethods.getCultivationInstance(player).setAccessCultivation(usage);
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
+    }
+
+    /**
+     * Sets the amount of cultivation the player can output
+     * @param usage The amount of cultivation
+     * @param player The player
+     */
+    public static void setPlayerCultivationOutput(int usage, EntityPlayer player) {
+        PlayerMethods.getCultivationInstance(player).setCultivationOutput(usage);
+        Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));
+    }
+
+    /**
+     * Returns the amount of cultivation the player has access to
+     * @param usage The cultivation to set
+     * @param player The player
+     */
+    public static int getPlayerCultivationUsage(int usage, EntityPlayer player) {
+        return PlayerMethods.getCultivationInstance(player).getAccessCultivation();
+    }
+
+    /**
+     * Returns the amount of cultivation the player can output
+     * @param usage The amount of cultivation
+     * @param player The player
+     */
+    public static int getPlayerCultivationOutput(int usage, EntityPlayer player) {
+        return PlayerMethods.getCultivationInstance(player).getCultivationOutput();
     }
 
     /**

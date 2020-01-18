@@ -13,6 +13,8 @@ public class CultivationControl {
         private boolean isFly; //If the player is flying
         private String UUID; //The user ID
         private boolean frozen; //Is the entity frozen
+        private int cultivationAccess; //The cultivation access level
+        private int cultivationOutput; //The cultivation output
 
         @Override
         public void addCultivation(int cult) {
@@ -56,6 +58,26 @@ public class CultivationControl {
         @Override
         public void setName(String name) {
             this.UUID = name;
+        }
+
+        @Override
+        public void setAccessCultivation(int accessCultivation) {
+
+        }
+
+        @Override
+        public void setCultivationOutput(int cultivationOutput) {
+
+        }
+
+        @Override
+        public int getAccessCultivation() {
+            return 0;
+        }
+
+        @Override
+        public int getCultivationOutput() {
+            return 0;
         }
 
 

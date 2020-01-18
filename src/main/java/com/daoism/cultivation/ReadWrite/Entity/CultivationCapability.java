@@ -58,4 +58,30 @@ public interface CultivationCapability {
      */
     void setName(String name);
 
+    /**
+     * Set the amount of cultivation the player has access
+     * to
+     * @param accessCultivation The amount of cultivation
+     */
+    void setAccessCultivation(int accessCultivation);
+
+    /**
+     * Sets the amount of spiritual power the player outputs
+     * @param cultivationOutput The amount of spiritual power
+     */
+    void setCultivationOutput(int cultivationOutput);
+
+    /**
+     * Sets the amount of cultivation the player has access
+     * to
+     * @return The amount of cultivation
+     */
+    int getAccessCultivation();
+
+    /**
+     * Gets the amount of spirutual power the player outputs
+     * @return The amount of spiritual power
+     */
+    int getCultivationOutput();
+
 }
