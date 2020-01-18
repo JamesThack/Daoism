@@ -121,14 +121,14 @@ public class EventsClass {
                     }
                 }
             } else {
-                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 100) {
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 50) {
                     total -= 1;
                     cultCost -= 100;
                     if (total < 0) {
                         e.setCanceled(true);
+                        PlayerMethods.addPlayerCultivationUsage(cultCost, player);
                         break;
                     }
-                    PlayerMethods.addPlayerCultivationUsage(cultCost, player);
                 }
             }
         }
@@ -154,7 +154,7 @@ public class EventsClass {
                 } e.setAmount(total);
             } else {
                 int cultCost = 0;
-                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 100) {
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 50) {
                     total -= 1;
                     cultCost -= 100;
                     if (total < 0) {

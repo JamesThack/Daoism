@@ -54,6 +54,7 @@ public class DaoismCommand extends CommandBase {
                         PlayerMethods.sendMsgToPlayer(player, "Invalid cultivation level", new Style().setColor(TextFormatting.RED));
                     }
                     PlayerMethods.addEntityCultivation(addItion, player);
+                    PlayerMethods.setPlayerCultivationUsage(addItion, player);
                 }
             } else {
                 PlayerMethods.sendMsgToPlayer(player, "/daoism help", new Style().setColor(TextFormatting.RED));
