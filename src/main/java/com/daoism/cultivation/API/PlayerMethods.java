@@ -146,7 +146,7 @@ public class PlayerMethods {
 
     /**
      * adds to the amount of cultivation the player has access to
-     * @param usage The cultivation to set
+     * @param usage The cultivation to add
      * @param player The player
      */
     public static void addPlayerCultivationUsage(int usage, EntityPlayer player) {
@@ -162,6 +162,11 @@ public class PlayerMethods {
         }
     }
 
+    /**
+     * Sets the player cultivation that the player can access
+     * @param set The value tp add
+     * @param player The player
+     */
     public static void setPlayerCultivationUsage(int set, EntityPlayer player) {
         PlayerMethods.getCultivationInstance(player).setAccessCultivation(set);
         Daoism.handle.sendToNetwork(PlayerMethods.getCultivationInstance(player));

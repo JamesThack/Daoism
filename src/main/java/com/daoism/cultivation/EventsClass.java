@@ -110,15 +110,25 @@ public class EventsClass {
     public void onEntityAttack(LivingAttackEvent e) {
         if(e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
+            float total = e.getAmount();
+            int cultCost = 0;
             if (e.getSource().equals(DamageSource.FALL)) {
-                float total = e.getAmount();
-                for (int i = 0; i < PlayerMethods.getEntityCultivationLevel(player); i+= 1000) {
-                    total -=1;
-                    System.out.println(total);
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 1000) {
+                    total -= 1;
                     if (total < 0) {
                         e.setCanceled(true);
                         break;
                     }
+                }
+            } else {
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 100) {
+                    total -= 1;
+                    cultCost -= 100;
+                    if (total < 0) {
+                        e.setCanceled(true);
+                        break;
+                    }
+                    PlayerMethods.addPlayerCultivationUsage(cultCost, player);
                 }
             }
         }
@@ -132,14 +142,27 @@ public class EventsClass {
     public void onEntityDamage(LivingHurtEvent e) {
         if(e.getEntity() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntity();
+            float total = e.getAmount();
             if (e.getSource().equals(DamageSource.FALL)) {
-                float total = e.getAmount();
-                for (int i = 0; i < PlayerMethods.getEntityCultivationLevel(player); i+= 1000) {
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i+= 1000) {
                     total -=1;
                     if (total < 0) {
                         e.setCanceled(true);
                         total = 0;
                         break;
+                    }
+                } e.setAmount(total);
+            } else {
+                int cultCost = 0;
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 100) {
+                    total -= 1;
+                    cultCost -= 100;
+                    if (total < 0) {
+                        e.setCanceled(true);
+                        total = 0;
+                        break;
+                    } else {
+                        PlayerMethods.addPlayerCultivationUsage(cultCost, player);
                     }
                 } e.setAmount(total);
             }
