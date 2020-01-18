@@ -191,6 +191,21 @@ public class PlayerMethods {
     }
 
     /**
+     * Same as above method but has a limit
+     * @param player The player
+     * @param max The max amount
+     * @return If exceeds the max, the max otherwise the cultivation level
+     */
+    public static int getPlayerCultivationUsage(EntityPlayer player, int max) {
+        int access = PlayerMethods.getCultivationInstance(player).getAccessCultivation();
+        if (access > max) {
+            return max;
+        } else {
+            return access;
+        }
+    }
+
+    /**
      * Returns the amount of cultivation the player can output
      * @param player The player
      */

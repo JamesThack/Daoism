@@ -35,27 +35,25 @@ public class Attraction extends ItemBase {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack curItem = player.getHeldItem(handIn);
         if (!worldIn.isRemote) {
-            Entity entity = PlayerMethods.entityPlayerIsLookingAt(player, (PlayerMethods.getEntityCultivationLevel(player )/ 25));
+            Entity entity = PlayerMethods.entityPlayerIsLookingAt(player, (PlayerMethods.getPlayerCultivationUsage(player )/ 25));
             if (entity != null) {
                 Vec3d lookVec = player.getLookVec();
                 double maxer = 4000;
                 int topper = 8000;
                 if (entity instanceof EntityLiving) {
                     maxer = ((EntityLiving) entity).getMaxHealth() * 200;
-                    System.out.println(maxer);
                     topper = (int) maxer * 2;
-                    System.out.println(topper);
                 }
-                PlayerMethods.setPlayerCultivationUsage(0, player);
-                double x = ((lookVec.x * 0.3) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
-                double y = (((lookVec.y + 0.5) * 0.6) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
-                double z = ((lookVec.z * 0.3) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer));
+                double x = ((lookVec.x * 0.3) * (PlayerMethods.getPlayerCultivationUsage(player, topper) / maxer));
+                double y = (((lookVec.y + 0.5) * 0.6) * (PlayerMethods.getPlayerCultivationUsage(player, topper) / maxer));
+                double z = ((lookVec.z * 0.3) * (PlayerMethods.getPlayerCultivationUsage(player, topper) / maxer));
                 entity.fallDistance = 0;
                 if (player.isSneaking()) {
                     entity.setVelocity(-x, (-y * 2), -z);
                 } else {
                     entity.setVelocity(x, y, z);
                 }
+                PlayerMethods.addPlayerCultivationUsage(-(topper / 1000), player);
             }
         } return new ActionResult<>(EnumActionResult.SUCCESS, curItem);
     }

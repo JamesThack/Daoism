@@ -38,6 +38,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
+import net.minecraftforge.event.world.NoteBlockEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -121,7 +122,7 @@ public class EventsClass {
                     }
                 }
             } else {
-                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 50) {
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 10) {
                     total -= 1;
                     cultCost -= 100;
                     if (total < 0) {
@@ -154,7 +155,7 @@ public class EventsClass {
                 } e.setAmount(total);
             } else {
                 int cultCost = 0;
-                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 50) {
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(player); i += 10) {
                     total -= 1;
                     cultCost -= 100;
                     if (total < 0) {
@@ -170,7 +171,12 @@ public class EventsClass {
         if(e.getSource().getTrueSource() instanceof EntityPlayer) {
             EntityPlayer attacker = (EntityPlayer) e.getSource().getTrueSource();
             if(attacker.getHeldItemMainhand().getItem().equals(ItemInit.FLYING_SWORD)) {
-                e.setAmount( (int)  (PlayerMethods.getEntityCultivationLevel(attacker) / 1000 ) );
+                int cost = 0;
+                for (int i = 0; i < PlayerMethods.getPlayerCultivationUsage(attacker, (int) e.getEntityLiving().getHealth() * 1000); i+= 1000) {
+                    cost +=1;
+                }
+                PlayerMethods.addPlayerCultivationUsage(-(cost * 10), attacker);
+                e.setAmount(cost);
             }
         }
     }
