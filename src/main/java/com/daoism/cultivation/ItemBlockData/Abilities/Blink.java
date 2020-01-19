@@ -34,12 +34,13 @@ public class Blink extends ItemBase {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
         ItemStack curItem = player.getHeldItem(handIn);
         if (!worldIn.isRemote) {
-            if (PlayerMethods.getEntityCultivationLevel(player) < 200) {
+            if (PlayerMethods.getPlayerCultivationUsage(player) < 200) {
                 PlayerMethods.sendMsgToPlayer(player, "You do not have enough cultivation to use this tome");
                 return new ActionResult<>(EnumActionResult.SUCCESS, curItem);
             } else {
-                int traceDistance = 20 + ((PlayerMethods.getEntityCultivationLevel(player) - 200) / 40);
+                int traceDistance = 20 + ((PlayerMethods.getPlayerCultivationUsage(player) - 200) / 40);
                 RayTraceResult MOP = player.rayTrace(traceDistance, 1.0F);
+                PlayerMethods.addPlayerCultivationUsage(-(MOP.getBlockPos().getX() ), player);
                 if (!player.getEntityWorld().getBlockState(MOP.getBlockPos()).getBlock().getUnlocalizedName().equals("tile.air")) {
                     player.setPositionAndUpdate(MOP.getBlockPos().getX(), (MOP.getBlockPos().getY() + 1), MOP.getBlockPos().getZ());
                     int cooldown;

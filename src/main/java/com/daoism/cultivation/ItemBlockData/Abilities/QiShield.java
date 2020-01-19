@@ -55,10 +55,11 @@ public class QiShield extends ItemBase {
                 } else {
                     y = -1;
                 }
-                double x = ((entity.getPosition().getX() - player.getPosition().getX())  * 0.1) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer);
-                y = (y * 0.1)  * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer);
-                double z = ((entity.getPosition().getZ() - player.getPosition().getZ())  * 0.1) * (PlayerMethods.getEntityCultivationLevel(player, topper) / maxer);
+                double x = ((entity.getPosition().getX() - player.getPosition().getX())  * 0.1) * (PlayerMethods.getPlayerCultivationUsage(player, topper) / maxer);
+                y = (y * 0.1)  * (PlayerMethods.getPlayerCultivationUsage(player, topper) / maxer);
+                double z = ((entity.getPosition().getZ() - player.getPosition().getZ())  * 0.1) * (PlayerMethods.getPlayerCultivationUsage(player, topper) / maxer);
                 entity.fallDistance = 0;
+                PlayerMethods.addPlayerCultivationUsage(-(topper / 1000), player);
                 if (player.isSneaking()) {
                     entity.setVelocity(-x, (-y * 2), -z);
                 } else {
