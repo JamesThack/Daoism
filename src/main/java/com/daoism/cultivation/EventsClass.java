@@ -176,7 +176,7 @@ public class EventsClass {
                     cost +=1;
                 }
                 PlayerMethods.addPlayerCultivationUsage(-(cost * 10), attacker);
-                e.setAmount(cost);
+                e.setAmount(cost + 1);
             }
         }
     }
